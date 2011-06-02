@@ -31,7 +31,10 @@ class FoodOrdering extends Controller {
 		}
 	}
 	
-	function chooseRestaurant() {
+	function chooseRestautant() {
+		if ($_POST["ssCode"] == "3e27GW7V729q60ud"){
+			$this->load->view('foodOrdering/chooseRestaurant');
+		}
 	}
 	
 	function selectFood() {

@@ -1,2 +1,43 @@
 @charset "UTF-8";
 /* CSS Document */
+
+/* Stage 1 */
+#mu_FO_s1_wraooer { position: relative; overflow: hidden; min-height: 600px; }
+#mu_FO_s1_left { width: 159px; position: absolute; top: 0; left: 0; z-index: 99; }
+.mu_FO_s1_navs { height: 80px; background-color: #f8f6f1; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: solid; border-color: #f2dda5; }
+.mu_FO_s1_navs.mu_first { margin-top: 20px; border-top-width: 1px; }
+.mu_FO_s1_navs.mu_active { background-color: #fffaec; border-right-color: #fffaec; }
+.mu_FO_s1_navs a { display: block; padding-top: 30px; padding-left: 10px; font-size: 22px; color: #d1d1d1; text-decoration: none; float: left; }
+.mu_FO_s1_navs.mu_active a { color: #c8b684; }
+.mu_FO_s1_navs .mu_FO_s1_navs_icon { overflow: hidden; width: 48px; height: 48px; display: block; background-image: url(../images/foodOrdering/s1_nav_icons.png); float: left; margin: 15px 0 0 10px; }
+.mu_FO_s1_navs#mu_FO_s1_nav1 .mu_FO_s1_navs_icon { background-position: 0 0; }
+.mu_FO_s1_navs#mu_FO_s1_nav1.mu_active .mu_FO_s1_navs_icon { background-position: 0 -48px; }
+.mu_FO_s1_navs#mu_FO_s1_nav2 .mu_FO_s1_navs_icon { background-position: -48px 0; }
+.mu_FO_s1_navs#mu_FO_s1_nav2.mu_active .mu_FO_s1_navs_icon { background-position: -48px -48px; }
+.mu_FO_s1_navs#mu_FO_s1_nav3 .mu_FO_s1_navs_icon { background-position: -96px 0; }
+.mu_FO_s1_navs#mu_FO_s1_nav3.mu_active .mu_FO_s1_navs_icon { background-position: -96px -48px; }
+.mu_FO_s1_navs#mu_FO_s1_nav4 .mu_FO_s1_navs_icon { background-position: -144px 0; }
+.mu_FO_s1_navs#mu_FO_s1_nav4.mu_active .mu_FO_s1_navs_icon { background-position: -144px -48px; }
+.mu_FO_s1_tabs { width: 700px; background-color: #fffaec; border: solid 1px #f2dda5; min-height: 400px; display: none; position: absolute; top: 0; left: 158px; z-index: 98; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+.mu_FO_s1_tabs.mu_active { display: block; }
+#mu_FO_s1_tab1_wrapper { width: 660px; margin: 20px auto; }
+
+
+/* Stage 2 */
+#mu_FO_s2_left { float: left; width: 590px; }
+#mu_FO_s2_right { float: left; width: 250px; margin-left: 20px; }
+#mu_FO_toolbox { height: 100px; background-color: #fffaec; border: solid 1px #f2dda5; }
+.mu_FO_tools { float: left; width: 147px; padding-top: 18px; }
+.mu_FO_tools .mu_FO_tickbox { background-image: url('../images/foodOrdering/check_box.png'); width: 20px; height: 20px; float: left; background-position: -20px 0; cursor: pointer; margin-left: 5px; }
+.mu_FO_tools.mu_active .mu_FO_tickbox { background-position: 0;}
+.mu_FO_tools a { font-size: 14px; color: #9b501f; text-decoration: none; display: block; float: left; margin-left: 5px; }
+#mu_FO_restList { margin-top: 15px; }
+.mu_FO_restBlk { width: 138px; height: 138px; border: solid 1px #f2dda5; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; float: left; margin-right: 10px; margin-bottom: 10px;}
+.mu_FO_restBlk.mu_lastCol { margin-right: 0;}
+.mu_rest_logo { float: left; width: 40px; margin-left: 5px; padding-top: 10px; }
+.mu_rest_logo img { width: 40px; height: 40px; }
+.mu_rest_name { color: #9b501f; font-size: 14px; font-weight: bold; float: left; width: 86px; margin-left: 5px; padding-top: 10px; }
+.mu_rest_ranking { clear: both;}
+.mu_rest_details { color: #9b501f; font-size: 14px; clear: both; margin-left: 5px;}
+.mu_rest_details dt { float: left; clear: both;}
+.mu_rest_details dd { float: left;}
