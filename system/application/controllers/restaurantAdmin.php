@@ -9,6 +9,7 @@ class RestaurantAdmin extends Controller {
 	
 	function index()
 	{
+    /* auth check: this->MemberSystem->isLogin() */
 		if (!$this->MemberSystem->isLogin()) {
 			exit('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />請先登入，並升級成為餐廳管理賬號。');
 		} else if (!$this->MemberSystem->isResOwner()) {
@@ -23,6 +24,8 @@ class RestaurantAdmin extends Controller {
 		$this->template->add_js('plugin/fileUpload/jquery.fileupload-ui.js');
 		
 		$this->template->add_js('script/restaurantAdmin.js');
+
+    /* the page body */
 		$this->template->write_view('content', 'restaurantAdmin/dataUpdateFlow');
 		$this->template->write_view('navBar', 'restaurantAdmin/nav');
 		$this->template->render();
@@ -104,9 +107,16 @@ class RestaurantAdmin extends Controller {
 		echo json_encode($outputArray);
 	}
 	
+
+  /* rpc: get json data.
+   * @param stagenumber: stageX, where X is 1 2 3 or 4.
+   * @display: a json serialized string containing data
+   */
 	function resGetData($stagenumber = NULL)
 	{
+    /* XXX: auth */
 		if (($this->input->post('ssCode') != '3H98Ci11i2tE') || ($stagenumber == NULL) || ($this->session->userdata('userID') == NULL)) exit('No direct script access allowed');
+
 		$uid = $this->session->userdata('userID');
 		switch ($stagenumber){
 			case 'stage1':
@@ -178,8 +188,9 @@ class RestaurantAdmin extends Controller {
 				}
 				echo json_encode($output_data);
 				break;
+
+      /* this is what i'm doing... (tim) */
 			case 'stage3':
-			
 				$output_data = NULL;
 				
 				$query0 = $this->db->query("SELECT * FROM `menu_block` WHERE `blkClass` != 0 AND `blkOwner` = ".$uid." ORDER BY `blkCol` ASC, `blkPosition` ASC");
@@ -187,15 +198,17 @@ class RestaurantAdmin extends Controller {
 				$this->db->where('fooOwner', $uid);
 				$this->db->order_by("fooID", "asc");
 				$query1 = $this->db->get('food_type1');
-				
-				
+        /* type1: single choice items */
+
 				$this->db->where('fooOwner', $uid);
 				$this->db->order_by("fooID", "asc");
 				$query2 = $this->db->get('food_type2');
+        /* type2: multiple choice items */
 				
 				$this->db->where('fooOwner', $uid);
 				$this->db->order_by("fooID", "asc");
 				$query3 = $this->db->get('food_type3');
+        /* type3: select multiple from multiple items */
 				
 				
 				if ($query0->num_rows() > 0) {
@@ -590,6 +603,85 @@ class RestaurantAdmin extends Controller {
 		}
 	
 	}
+
+  /* #tim#
+   * rpc: popup menu for a certain type of food at stage3
+   * @param foo_type: the type of the food to be displayed and modified.
+   * @display: a displayable html form
+   */
+  function resGetFoodInfoHtml($foo_type = -1) {
+    /* XXX: auth control */
+    $this->load->view('restaurantAdmin/foodinfo_popup',
+                      array('foo_type' => $foo_type));
+  }
+
+  /* #tim#
+   * rpc: called when a stage3 popup menu is closed.
+   * @param foo_type: the type of the food to be displayed and modified.
+   * @param (POST) update_data: a json-encoded string containing things
+   * to be updated.
+   * @display: nothing?
+   *
+   * XXX: auth control. we only allow certain user to update itself's
+   * information.
+   */
+  function resUpdateFoodInfoData($foo_type = -1) {
+    $jdata = $this->input->post('update_data');
+    $data = json_decode($jdata);
+    $drink = $data->drink;
+
+    /* check existence */
+    $query = $this->db->get_where('menu_food_popupoptions',
+                                  array('fooType' => $foo_type), 1);
+    if (!$query->result()) {
+      /* then we need to create a new row for this type of food */
+      $this->db->insert('menu_food_popupoptions',
+                         array('fooType' => $foo_type,
+                               'drink' => json_encode($drink)));
+    } else {
+      $this->db->update('menu_food_popupoptions',
+                        array('drink' => json_encode($drink)),
+                        array('fooType' => $foo_type));
+    }
+    echo "inserting done:\n";
+    print_r($drink);
+  }
+
+  function resGetFoodInfoData($foo_type = -1) {
+    /* XXX: auth control and validity checking */
+    $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
+    $result = $query->result();
+    $this_row = $result[0];
+    $owner = $this_row->blkOwner;
+
+    $all_drinks_query = $this->db->get_where('menu_drink',
+                            array('driOwner' => $owner));
+    $all_drinks_rows = $all_drinks_query->result();
+    $all_drinks = array();
+		foreach ($all_drinks_rows as $key => $value) {
+      $all_drinks[$key] = array(
+        'drinkID'   => $value->driID,
+        'drinkName' => $value->driName
+      );
+    }
+
+    /* for one block(type) */
+    $drinks_selected_query = $this->db->get_where('menu_food_popupoptions',
+                                 array('fooType' => $foo_type), 1);
+    $drinks_selected_rows = $drinks_selected_query->result();
+    if (!$drinks_selected_rows) {
+      $drinks_selected = array();
+      /* left it empty */
+    } else {
+      $the_row = $drinks_selected_rows[0];
+      $drinks_selected = json_decode($the_row->drink);
+    }
+
+    echo json_encode(array(
+      "all_drinks"      => $all_drinks,
+      "drinks_selected" => $drinks_selected
+    ));
+  }
 	
 }
 
