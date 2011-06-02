@@ -1,3 +1,20 @@
+<script type="text/javascript">
+(function($){
+	$.fn.mu_ranking = function() {
+		var ranking = parseInt($(this).attr('ranking'));
+		$(this).width(22*ranking + 7*(ranking-1));
+		$(this).find('img').attr('alt', ranking);
+	};
+})( jQuery );
+
+
+$(document).ready(function(){
+	
+});
+
+</script>
+
+
 <div id="mu_FO_s2_wrapper">
 	<div id="mu_FO_s2_left">
 		<div id="mu_FO_toolbox">
@@ -14,7 +31,7 @@
 			<div class="mu_FO_restBlk">
 				<div class="mu_rest_logo"><img src="upload/img_reslogo/2.jpg" /></div>
 				<div class="mu_rest_name">正宗重慶風味燒烤</div>
-				<div class="mu_rest_ranking" ranking="4"></div>
+				<div class="mu_rest_ranking" ranking="4"><img src="images/foodOrdering/ranking_star.png" /></div>
 				<div class="mu_rest_details">
 					<dl>
 						<dt>起送價：</dt>

@@ -1,29 +1,36 @@
-<div id="mu_FO_s1_wraooer">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#mu_FO_s1_wrapper').height($('#mu_FO_s1_wrapper #mu_FO_s1_tab1').height() + 2);
+});
+</script>
+<div id="mu_FO_s1_wrapper">
 	<div id="mu_FO_s1_left">
-		<div class="mu_FO_s1_navs mu_active mu_first" id="mu_FO_s1_nav1">
+		<div class="mu_FO_s1_navs mu_active mu_first" id="mu_FO_s1_nav1" targetTab="1">
 			<div class="mu_FO_s1_navs_icon"></div>
-			<a href="#">地圖</a> </div>
-		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav2">
+			<a>地圖</a> </div>
+		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav2" targetTab="2">
 			<div class="mu_FO_s1_navs_icon"></div>
-			<a href="#">關鍵字</a> </div>
-		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav3">
+			<a>關鍵字</a> </div>
+		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav3" targetTab="3">
 			<div class="mu_FO_s1_navs_icon"></div>
-			<a href="#">分區</a> </div>
-		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav4">
+			<a>分區</a> </div>
+		<div class="mu_FO_s1_navs" id="mu_FO_s1_nav4" targetTab="4">
 			<div class="mu_FO_s1_navs_icon"></div>
-			<a href="#">地鐵站</a> </div>
+			<a>地鐵站</a> </div>
 	</div>
-	<div class="mu_FO_s1_tabs mu_active" id="mu_FO_s1_tab1">
+	<div class="mu_FO_s1_tabs mu_active" id="mu_FO_s1_tab1" tab="1">
 		<div id="mu_FO_s1_tab1_wrapper">
 			<iframe width="660" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com.hk/?ie=UTF8&amp;hq=&amp;hnear=%E9%A6%99%E6%B8%AF&amp;ll=22.396428,114.109497&amp;spn=1.037326,1.134338&amp;z=10&amp;brcurrent=3,0x3403e2eda332980f:0xf08ab3badbeac97c,1&amp;output=embed"></iframe>
 		</div>
 	</div>
-	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab2">
-		
+	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab2" tab="2">
+		<form id="mu_posSearch" action="posSearch" method="post">
+			<input type="text" value="" maxlength="10" name="posSearch_input" title="你係邊到～？" />
+			<input type="image" src="#" name="home_guest_find" id="posSearch_submit" />
+		</form>
 	</div>
-	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab3"></div>
-	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab4">
-		<img src="../After/mu_MTR.png" width="700" height="563" border="0" usemap="#mu_FO_MTR" />
+	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab3" tab="3"></div>
+	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab4" tab="4"> <img src="images/mu_MTR.png" width="700" height="563" border="0" usemap="#mu_FO_MTR" />
 		<map name="mu_FO_MTR" id="mu_FO_MTR">
 			<area shape="rect" coords="61,4,106,50" href="#isl01" />
 			<area shape="rect" coords="107,4,141,50" href="#isl02" />
@@ -48,13 +55,12 @@
 			<area shape="rect" coords="266,69,308,124" href="#ktl07" />
 			<area shape="rect" coords="309,69,356,124" href="#ktl08" />
 			<area shape="rect" coords="357,69,399,124" href="#ktl09" />
-			<area shape="rect" coords="400,69,496,124" href="#ktl10" />
-			<area shape="rect" coords="497,69,447,124" href="#ktl11" />
-			<area shape="rect" coords="448,69,499,124" href="#ktl12" />
-			<area shape="rect" coords="500,69,543,124" href="#ktl13" />
-			<area shape="rect" coords="544,69,581,124" href="#ktl14" />
-			<area shape="rect" coords="582,69,624,124" href="#ktl15" />
-			<area shape="rect" coords="625,69,680,124" href="#ktl16" />
+			<area shape="rect" coords="400,69,447,124" href="#ktl10" />
+			<area shape="rect" coords="448,69,499,124" href="#ktl11" />
+			<area shape="rect" coords="500,69,543,124" href="#ktl12" />
+			<area shape="rect" coords="544,69,581,124" href="#ktl13" />
+			<area shape="rect" coords="582,69,624,124" href="#ktl14" />
+			<area shape="rect" coords="625,69,680,124" href="#ktl15" />
 			<area shape="rect" coords="8,136,48,193" href="#twl01" />
 			<area shape="rect" coords="49,136,85,193" href="#twl02" />
 			<area shape="rect" coords="86,136,123,193" href="#twl03" />

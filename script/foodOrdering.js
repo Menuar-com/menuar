@@ -22,7 +22,7 @@ $(document).ready(function(){
 				contentURL = 'online/foodOrdering/chooseRestautant.html';
 				break;
 			case 3:
-				contentURL = "online/foodOrdering/whereAreYou.html";
+				contentURL = "online/foodOrdering/selectFood.html";
 				break;
 			case 4:
 				contentURL = "online/foodOrdering/whereAreYou.html";
@@ -34,8 +34,22 @@ $(document).ready(function(){
 		});
 	});
 	
+	// JS Style / Effect
+	console.log($('input[title!=""]'))
+	$('input[title!=""]').hint();
+	
 	// Event listerner
+	$('#mu_FO_s1_wrapper .mu_FO_s1_navs').live('hover', function(){
+		var targetTab = $(this).attr('targetTab');
+		$('#mu_FO_s1_wrapper .mu_FO_s1_navs').removeClass('mu_active');
+		$(this).addClass('mu_active');
+		$('#mu_FO_s1_wrapper .mu_FO_s1_tabs').removeClass('mu_active');
+		$('#mu_FO_s1_wrapper .mu_FO_s1_tabs[tab='+targetTab+']').addClass('mu_active');
+		$('#mu_FO_s1_wrapper').height($('#mu_FO_s1_wrapper .mu_FO_s1_tabs[tab='+targetTab+']').height() + 2);
+	})
+	
 	$('#mu_FO_s2_wrapper .mu_FO_tools').live('click', function(){
 		$(this).toggleClass('mu_active');
 	});
+	
 });

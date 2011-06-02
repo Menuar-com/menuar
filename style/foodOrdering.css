@@ -1,8 +1,12 @@
 @charset "UTF-8";
 /* CSS Document */
 
-/* Stage 1 */
-#mu_FO_s1_wraooer { position: relative; overflow: hidden; min-height: 600px; }
+/* Common to all stages */
+#mu-res-foodordering-stage-container { margin-bottom: 20px;}
+
+
+/** Stage 1 **/
+#mu_FO_s1_wrapper { position: relative; overflow: hidden; }
 #mu_FO_s1_left { width: 159px; position: absolute; top: 0; left: 0; z-index: 99; }
 .mu_FO_s1_navs { height: 80px; background-color: #f8f6f1; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-style: solid; border-color: #f2dda5; }
 .mu_FO_s1_navs.mu_first { margin-top: 20px; border-top-width: 1px; }
@@ -22,8 +26,10 @@
 .mu_FO_s1_tabs.mu_active { display: block; }
 #mu_FO_s1_tab1_wrapper { width: 660px; margin: 20px auto; }
 
+/* tab4 */
+#mu_FO_s1_tab4 img { margin: 20px auto;}
 
-/* Stage 2 */
+/** Stage 2 **/
 #mu_FO_s2_left { float: left; width: 590px; }
 #mu_FO_s2_right { float: left; width: 250px; margin-left: 20px; }
 #mu_FO_toolbox { height: 100px; background-color: #fffaec; border: solid 1px #f2dda5; }
@@ -37,7 +43,31 @@
 .mu_rest_logo { float: left; width: 40px; margin-left: 5px; padding-top: 10px; }
 .mu_rest_logo img { width: 40px; height: 40px; }
 .mu_rest_name { color: #9b501f; font-size: 14px; font-weight: bold; float: left; width: 86px; margin-left: 5px; padding-top: 10px; }
-.mu_rest_ranking { clear: both;}
+.mu_rest_ranking { clear: both; overflow: hidden;}
+.mu_rest_ranking img {margin: 2px 5px;}
 .mu_rest_details { color: #9b501f; font-size: 14px; clear: both; margin-left: 5px;}
 .mu_rest_details dt { float: left; clear: both;}
 .mu_rest_details dd { float: left;}
+
+
+/** Stage 3 **/
+.mu_ss_preview {border: 1px solid #F0F;}
+
+#mu_restInfo { background-color: #fffaec; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 10px; }
+#mu_restInfo  #mu_restPhoto { float: right; width: 320px; height: 220px;}
+#mu_restInfo  #mu_restImg { float: left; width: 60px; height: 60px;}
+#mu_restInfo  #mu_restName { float: left; width: 380px; margin-left: 10px;}
+#mu_restInfo  #mu_restName h3 { color: #888272; font-size: 24px; padding: 15px 0;}
+#mu_restInfo  #mu_restDetails { clear:left; float: left; width: 480px; color: #888272; font-size: 18px; margin-top: 10px; }
+#mu_restInfo  #mu_restDetails dt { clear: left; float: left; margin-right: 15px; }
+#mu_restInfo  #mu_restDetails dd { float: left; margin-bottom: 5px; font-size: 16px;}
+#mu_restInfo #mu_tools { clear: both;}
+#mu_restInfo #mu_tools #mu_t_bookmark { float: left;}
+#mu_restInfo #mu_tools #mu_t_share { float: left;}
+#mu_restInfo #mu_tools #mu_t_fblike { float: left; height: 20px; width: 400px;}
+
+
+
+
+
+
