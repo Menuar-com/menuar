@@ -43,8 +43,8 @@
 .mu_rest_logo { float: left; width: 40px; margin-left: 5px; padding-top: 10px; }
 .mu_rest_logo img { width: 40px; height: 40px; }
 .mu_rest_name { color: #9b501f; font-size: 14px; font-weight: bold; float: left; width: 86px; margin-left: 5px; padding-top: 10px; }
-.mu_rest_ranking { clear: both; overflow: hidden;}
-.mu_rest_ranking img {margin: 2px 5px;}
+.mu_rest_ranking { clear: both; overflow: hidden; margin-left: 5px;}
+.mu_rest_ranking img {margin: 2px 0;}
 .mu_rest_details { color: #9b501f; font-size: 14px; clear: both; margin-left: 5px;}
 .mu_rest_details dt { float: left; clear: both;}
 .mu_rest_details dd { float: left;}
@@ -53,21 +53,36 @@
 /** Stage 3 **/
 .mu_ss_preview {border: 1px solid #F0F;}
 
-#mu_restInfo { background-color: #fffaec; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 10px; }
+#mu_restInfo { background-color: #fffaec; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 10px; margin-bottom: 20px; }
 #mu_restInfo  #mu_restPhoto { float: right; width: 320px; height: 220px;}
 #mu_restInfo  #mu_restImg { float: left; width: 60px; height: 60px;}
 #mu_restInfo  #mu_restName { float: left; width: 380px; margin-left: 10px;}
 #mu_restInfo  #mu_restName h3 { color: #888272; font-size: 24px; padding: 15px 0;}
 #mu_restInfo  #mu_restDetails { clear:left; float: left; width: 480px; color: #888272; font-size: 18px; margin-top: 10px; }
-#mu_restInfo  #mu_restDetails dt { clear: left; float: left; margin-right: 15px; }
-#mu_restInfo  #mu_restDetails dd { float: left; margin-bottom: 5px; font-size: 16px;}
+#mu_restInfo  #mu_restDetails dt { clear: left; float: left; margin-right: 15px; color: #968F7D; }
+#mu_restInfo  #mu_restDetails dd { float: left; margin-bottom: 5px;}
 #mu_restInfo #mu_tools { clear: both;}
 #mu_restInfo #mu_tools #mu_t_bookmark { float: left;}
 #mu_restInfo #mu_tools #mu_t_share { float: left;}
 #mu_restInfo #mu_tools #mu_t_fblike { float: left; height: 20px; width: 400px;}
 
+#mu_foodChoice { float: left; width: 640px; }
+#mu_foodChoice > div { margin-bottom: 20px; }
+#mu_foodChoice .mu_subtitle { color: #5f4e22; font-size: 24px; line-height: 30px; font-weight: normal; }
 
+#mu_cart { float: right; width: 200px; background-color: #fffaec; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 5px;}
+#mu_cart h5#mu_cartName { background-color: #fff7df; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 5px; color: #9d4f29; font-size: 18px; text-align: center; line-height: 30px;}
+#mu_cart p#mu_restname { color: #4f4040; font-size: 14px; margin: 5px 0 15px 0; }
+#mu_cart table { font-size: 14px; }
+#mu_cart tr.mu_firstRow { border-bottom: 1px dotted #000;}
+#mu_cart tr.mu_lastRow{ border-top: 1px dotted #000;}
+#mu_cart th, #mu_cart .mu_cartTotal { color: #5f4e22;}
+#mu_cart .td_center { text-align: center; vertical-align: middle;}
+#mu_cart td{ padding-bottom: 5px;}
+#mu_cart tr.mu_lastRow td{ padding-top: 5px;}
+#mu_cart #mu_cartTools { font-size: 14px; color: #1e00ff; margin-top: 20px;}
+#mu_cart #mu_cartTools > div { float: left; margin-left: 20px; cursor: pointer;}
+#mu_cart #mu_cartTools > div:hover { text-decoration: underline;}
 
-
-
+/* Popup Menu */
 

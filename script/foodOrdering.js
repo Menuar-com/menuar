@@ -6,6 +6,14 @@ function mu_init() {
 	});
 }
 
+(function($){
+	$.fn.mu_ranking = function() {
+		var ranking = parseInt($(this).attr('ranking'));
+		$(this).width(20*ranking + 7*(ranking-1));
+		$(this).find('img').attr('alt', 'Ranking: '+ranking);
+	};
+})( jQuery );
+
 $(document).ready(function(){
 	mu_init();
 	
