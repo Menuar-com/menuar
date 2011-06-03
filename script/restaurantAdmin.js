@@ -754,7 +754,7 @@ $(document).ready(function(){
 /* restaurant management tool functions */
 (function () {
   /* namespace RMan */
-  var RMan = window.RMan || {};
+  var RMan = window.RMan = window.RMan || {};
 
   RMan._focus_row = -1;
   RMan.set_focus_row = function (row_num) {
@@ -797,9 +797,6 @@ $(document).ready(function(){
     _register_event('popup', RMan.on_popup_clicked);
   });
 
-
-  /* put back */
-  window.RMan = RMan;
 })();
 
 

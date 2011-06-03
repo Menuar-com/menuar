@@ -629,6 +629,7 @@ class RestaurantAdmin extends Controller {
     $jdata = $this->input->post('update_data');
     $data = json_decode($jdata);
     $drink = $data->drink;
+    $soup = $data->soup;
 
     /* check existence */
     $query = $this->db->get_where('menu_food_popupoptions',
@@ -636,15 +637,13 @@ class RestaurantAdmin extends Controller {
     if (!$query->result()) {
       /* then we need to create a new row for this type of food */
       $this->db->insert('menu_food_popupoptions',
-                         array('fooType' => $foo_type,
-                               'drink' => json_encode($drink)));
-    } else {
-      $this->db->update('menu_food_popupoptions',
-                        array('drink' => json_encode($drink)),
-                        array('fooType' => $foo_type));
+                         array('fooType' => $foo_type));
     }
-    echo "inserting done:\n";
-    print_r($drink);
+    $this->db->update('menu_food_popupoptions',
+                      array('drink' => json_encode($drink),
+                            'soup' => json_encode($soup)),
+                      array('fooType' => $foo_type));
+    echo ">> inserting done <<\n";
   }
 
   /* rpc: dump menu_food_popupoptions for a given fooType as json
@@ -668,23 +667,37 @@ class RestaurantAdmin extends Controller {
     }
 
     /* for one block(type) */
-    $drinks_selected_query = $this->db->get_where('menu_food_popupoptions',
-                                 array('fooType' => $foo_type), 1);
-    $drinks_selected_rows = $drinks_selected_query->result();
-    if (!$drinks_selected_rows) {
-      /* left it empty */
-      $drinks_selected = array();
+    $opt_query = $this->db->get_where('menu_food_popupoptions',
+                                      array('fooType' => $foo_type), 1);
+    $opt_row = $opt_query->result();
+
+    /* init values. note that drinks are stored elsewhere but soups, sauces
+     * and staples are just a dict with key as dish name and value as
+     * selection mark.
+     */
+    $sel_drinks = array();
+    $all_soups = array();
+    $all_sauces = array();
+    $all_staples = array();
+
+    if (!$opt_row) {
+      /* the restaurant haven't added any options */
     } else {
-      $the_row = $drinks_selected_rows[0];
-      $drinks_selected = json_decode($the_row->drink);
+      $the_row = $opt_row[0];
+      $sel_drinks = json_decode($the_row->drink);
+      $all_soups = json_decode($the_row->soup);
+      $all_sauces = json_decode($the_row->sauce);
+      $all_staples = json_decode($the_row->staple);
     }
 
     echo json_encode(array(
-      "all_drinks"      => $all_drinks,
-      "drinks_selected" => $drinks_selected
+      "all_drinks" => $all_drinks,
+      "sel_drinks" => $sel_drinks,
+      "soups" => $all_soups,
+      "sauces" => $all_sauces,
+      "staples" => $all_staples,
     ));
   }
-	
 }
 
 /* End of file welcome.php */

@@ -10,6 +10,9 @@
   /* TODO: better ui, separate js from view */
 
     $(document).ready(function () {
+      /* our namespace */
+      RMan.popup = {};
+
       /* all drinks, fetched from the server */
       var all_drinks = {};
 
@@ -22,25 +25,154 @@
       /* UPDATE path */
       var post_path = 'online/restaurantAdmin/resUpdatefoodInfoData/';
 
-      $.getJSON(fetch_path + food_type, function (data) {
-        console.log(data);
+      /* dont use getJSON because it WILL FAIL SILENTLY */
+      $.get(fetch_path + food_type, function (data) {
+        data = $.parseJSON(data);
+        console.log('rpc got data --', data);
         construct_drink_options(data);
+        construct_soup_options(data);
       });
 
+      /* wrapper for all option blocks */
       var wrapper = $('#mu-res-admin-popup-wrapper');
-      wrapper.css('width', '400px');
+      wrapper.css('width', '720px');
 
-      var drink_dom = $('#mu-res-admin-popup-drink');
 
+      /* -*- SOUP option ctor -*- */
+      var construct_soup_options = function (data) {
+        var soup_dom = $('#mu-res-admin-popup-soup');
+        var soups_fetched = data.soups || {
+          chicken: false,
+          meat: true
+        };
+        var table_dom = $('<table border="1"></table>');
+        soup_dom.append(table_dom);
+
+        /* share to callback function.
+          items: jq-dom-nodes */
+        var table_cells = RMan.popup.soup_cells = [];
+
+        /* here the info are stored directly in the dom node created */
+        var construct_cell = function (name, enabled) {
+          var cell_created = $('<span selected="0"><input value="' +
+                               name + '"></input></span>');
+          var btn = $('<button>enable</button>');
+          var del_this = $('<a>x</a>');
+
+          /* toggle selection */
+          btn.click(function (e) {
+            var par = $($(this).parent());
+            var was_enabled = parseInt(par.attr('selected'));
+            if (was_enabled) {
+              $(this).text('enable');
+              par.attr('selected', '0');
+            } else {
+              $(this).text('disable');
+              par.attr('selected', '1');
+            }
+          });
+
+          del_this.click(function (e) {
+            var par = $($(this).parent());
+            $.each(table_cells, function (key, val) {
+              if ($(val)[0] == par[0])
+                table_cells[key] = null;
+            });
+            construct_table();  /* resize the table */
+          });
+
+          cell_created.append(btn);
+          cell_created.append(del_this);
+          table_cells.push(cell_created);
+
+          if (enabled) /* set enable */
+            btn.trigger('click');
+        };
+
+
+        /* called when cells are modified */
+        var construct_table = function () {
+          /* note as before $1.6, $.map only supports iter on arrays */
+          var new_cells = $.map(table_cells, function (item, i) {
+            if (item) return item;
+          });
+
+          /* update origin cells as well as data */
+          table_cells = RMan.popup.soup_cells = new_cells;
+
+          /* clean all */
+          table_dom.find('tr').detach();
+
+          /* put on */
+          $.each(table_cells, function (i, item) {
+            var item_col = parseInt(i % 3);
+            if (item_col == 0) {
+              /* starting a new row */
+              tr_dom = $('<tr></tr>');
+              table_dom.append(tr_dom);
+            }
+            var td_dom = $('<td></td>');
+            td_dom.append(item);
+            tr_dom.append(td_dom);
+          });
+
+          /* and add a appender cell at the back */
+          var i = table_cells.length;
+          var item_col = parseInt(i % 3);  /* 3 cols per row */
+          if (item_col == 0) {
+            /* starting a new row */
+            tr_dom = $('<tr></tr>');
+            table_dom.append(tr_dom);
+          }
+          var td_dom = $('<td></td>');
+          var appender = $('<a>appender</a>');
+          td_dom.append(appender);
+          tr_dom.append(td_dom);
+
+          /* click to append one textfield for input */
+          appender.click(function (e) {
+            construct_cell('', true);
+            construct_table();  /* and re-cons the table */
+          });
+        };
+
+        /* init the soup options using the json data */
+        $.each(soups_fetched, construct_cell);
+        construct_table();
+      };
+
+
+      /* drink block ctor. data is a object RPC-ed from server  */
       var construct_drink_options = function (data) {
+        /* the drink option block */
+        var drink_dom = $('#mu-res-admin-popup-drink');
+
         var all_drinks_fetched = data.all_drinks;
+
+        /* using table here... */
+        var table_dom = $('<table border="1"></table>');
+        drink_dom.append(table_dom);
+        var tr_dom = null;
+
         for (var i = 0; i < all_drinks_fetched.length; ++i) {
+          /* constructing each row */
+          var item_row = parseInt(i / 4);
+          var item_col = parseInt(i % 4);
+          if (item_col == 0) {
+            /* starting a new row */
+            tr_dom = $('<tr></tr>');
+            table_dom.append(tr_dom);
+          }
+          var td_dom = $('<td></td>');
+
+          /* the current rendering drink option */
           var it = all_drinks_fetched[i];
 /* XXX: improving ui */
-          var label = $('<div class="label" drinkID="' +
+          var label = $('<span class="label" drinkID="' +
                         String(it.drinkID) + '"><p>' +
-                        it.drinkName + '</p></div>');
+                        it.drinkName + '</p></span>');
           var btn = $('<button>enable</button>');
+          /* register click event */
           btn.click(function (e) {
             var drink_id = $(this).parent().attr('drinkID');
             var selected = all_drinks[drink_id];
@@ -55,24 +187,28 @@
           });
 /* XXX: improving ui till here */
           label.append(btn);
-          drink_dom.append(label);
+          td_dom.append(label);
+          tr_dom.append(td_dom);
 
+          /* save this drink's data */
           all_drinks[it.drinkID] = false;
         }
 
-        var sel_drinks = data.drinks_selected;
+        /* click on previous selected drinks */
+        var sel_drinks = data.sel_drinks;
         for (var i = 0; i < sel_drinks.length; ++i) {
           var drink_id = sel_drinks[i];
           var to_sel = drink_dom.find('[drinkID="' + drink_id + '"]');
           if (to_sel) {
-            /* init those that are already selected */
             to_sel.find('button').trigger('click');
           }
         }
 
-        window.RMan.upload_popup_data = function () {
+        /* called from restaurantAdmin.js:782 when this fancybox is closed */
+        RMan.upload_popup_data = function () {
           var to_post = {};
 
+          /* uploading drink data */
           var drink_data = [];
           for (var idx in all_drinks) {
             var selected = all_drinks[idx];
@@ -80,10 +216,24 @@
           }
           to_post.drink = drink_data;
 
+          /* uploading soup data */
+          soup_data = {};
+          $.each(RMan.popup.soup_cells, function (i, item) {
+            var soup_name = item.find('input').val();
+            if (soup_name.trim() == '')  /* ignore empty string */
+              return;
+            var selected  = parseInt(item.attr('selected'));
+            soup_data[soup_name] = selected;
+          });
+          to_post.soup = soup_data;
+
+          /* POST them */
           $.post(post_path + String(food_type), {
             update_data: JSON.stringify(to_post)
           }, function (_) {
+            /* XXX: debug */
             console.log('done submitting', to_post);
+            console.log('server response', _);
           });
         };
 
