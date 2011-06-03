@@ -7,6 +7,7 @@
 
 <script>
   (function () {
+  /* TODO: better ui, separate js from view */
 
     $(document).ready(function () {
       /* all drinks, fetched from the server */
@@ -35,6 +36,7 @@
         var all_drinks_fetched = data.all_drinks;
         for (var i = 0; i < all_drinks_fetched.length; ++i) {
           var it = all_drinks_fetched[i];
+/* XXX: improving ui */
           var label = $('<div class="label" drinkID="' +
                         String(it.drinkID) + '"><p>' +
                         it.drinkName + '</p></div>');
@@ -51,6 +53,7 @@
               $(this).text('disable');
             }
           });
+/* XXX: improving ui till here */
           label.append(btn);
           drink_dom.append(label);
 

@@ -647,6 +647,8 @@ class RestaurantAdmin extends Controller {
     print_r($drink);
   }
 
+  /* rpc: dump menu_food_popupoptions for a given fooType as json
+   */
   function resGetFoodInfoData($foo_type = -1) {
     /* XXX: auth control and validity checking */
     $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
@@ -670,8 +672,8 @@ class RestaurantAdmin extends Controller {
                                  array('fooType' => $foo_type), 1);
     $drinks_selected_rows = $drinks_selected_query->result();
     if (!$drinks_selected_rows) {
-      $drinks_selected = array();
       /* left it empty */
+      $drinks_selected = array();
     } else {
       $the_row = $drinks_selected_rows[0];
       $drinks_selected = json_decode($the_row->drink);

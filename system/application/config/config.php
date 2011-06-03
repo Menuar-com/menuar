@@ -13,7 +13,7 @@
 */
 //$config['base_url']	= "http://143.89.227.105:8888/menuar/";
 
-if(strpos($_SERVER['HTTP_HOST'],"localhost") !== false || strpos($_SERVER['HTTP_HOST'],"8888") !== false) {
+if(strpos($_SERVER['HTTP_HOST'],"localhost") !== false || strpos($_SERVER['HTTP_HOST'],"8888") !== false || strpos($_SERVER['HTTP_HOST'], '143.89') !== false) {
 	$config['base_url']	= "http://".$_SERVER['HTTP_HOST']."/menuar/";
 } else {
 	$config['base_url']	= "http://".$_SERVER['HTTP_HOST']."/";

@@ -589,29 +589,29 @@ $(document).ready(function(){
     });
     
     // Stage 3 add Form function
-    $('.mu-stage3-add-class').live('click', function(){
-        S3AddForm();
-    muResAdminStagesHeight();
+    $('.mu-stage3-add-class').live('click', function () {
+      S3AddForm();
+      muResAdminStagesHeight();
     });
     
     // Stage 3 Management Tools function
     //
     $('#mu-res-admin-stage3 .mu-stage3-form  input').live('click', function(){
-        var s3FocusFormIndex_new = parseInt($(this).parents('.mu-stage3-form').attr('formid'));
-        if (s3FocusFormIndex_new != s3FocusFormIndex) {
-            s3FocusFormIndex = s3FocusFormIndex_new;
-            /* move the manage tool to the form that is currently
-             * being focused on. XXX: implement popup-menu from here.
-             */
-            var MTB_top = $('#mu-res-admin-stage3 .mu-stage3-form[formid=' + s3FocusFormIndex + ']').position().top;
+      var s3FocusFormIndex_new = parseInt($(this).parents('.mu-stage3-form').attr('formid'));
+      if (s3FocusFormIndex_new != s3FocusFormIndex) {
+        s3FocusFormIndex = s3FocusFormIndex_new;
+        /* move the manage tool to the form that is currently
+         * being focused on. XXX: implement popup-menu from here.
+         */
+        var MTB_top = $('#mu-res-admin-stage3 .mu-stage3-form[formid=' + s3FocusFormIndex + ']').position().top;
 
-            /* index starts from 1 */
-            RMan.set_focus_row(s3FocusFormIndex);
+        /* index starts from 1 */
+        RMan.set_focus_row(s3FocusFormIndex);
 
-            $('#mu-res-admin-stage3 .mu-stage3-managecol').animate({
-                'top': MTB_top
-            });
-        }
+        $('#mu-res-admin-stage3 .mu-stage3-managecol').animate({
+            'top': MTB_top
+        });
+      }
     });
     
     // Change form
