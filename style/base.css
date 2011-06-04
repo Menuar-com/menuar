@@ -12,6 +12,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 .clearer { clear: both; display: block; margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; }
 .left { float: left; }
 .right { float: right; }
+.center { text-align: center}
+.vCenter { vertical-align: middle;}
 img { border: 0; }
 img.left { float: left; margin: 2px 20px 16px 0; }
 img.right { float: right; margin: 2px 0 16px 20px; }

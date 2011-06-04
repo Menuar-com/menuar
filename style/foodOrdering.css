@@ -81,8 +81,47 @@
 #mu_cart td{ padding-bottom: 5px;}
 #mu_cart tr.mu_lastRow td{ padding-top: 5px;}
 #mu_cart #mu_cartTools { font-size: 14px; color: #1e00ff; margin-top: 20px;}
-#mu_cart #mu_cartTools > div { float: left; margin-left: 20px; cursor: pointer;}
+#mu_cart #mu_cartTools > div { float: left; margin-left: 8px; cursor: pointer;}
 #mu_cart #mu_cartTools > div:hover { text-decoration: underline;}
 
-/* Popup Menu */
+/* Popup Menu - Common */
+.mu_CD_title { color: #9d4f29; font-size: 24px; line-height: 30px;}
+.mu_CD_main { max-height: 480px; width: 740px; overflow-y: hidden; overflow-x: hidden; }
 
+/* Popup Menu - Food Options */
+#mu_popup_moreOption .mu_CD_title span.mu_CD_chosen { color: #ff6600;}
+#mu_popup_moreOption .mu_CD_subTitle { color: #5f4e22; font-size: 18px; line-height: 25px; padding-left: 10px; }
+#mu_popup_moreOption .mu_CD_opts { clear: both; margin-top: 15px; }
+#mu_popup_moreOption .mu_CD_opts h6 { padding-left: 30px; font-size: 16px; color: #b12323; background: url(../images/foodOrdering/ios_ui.png) no-repeat scroll 0 0; line-height: 26px; height: 30px;}
+#mu_popup_moreOption .mu_CD_opts h7 { font-size: 14px; color: #9d4f29; text-decoration: underline; text-align: center; display: block; margin-bottom: 10px; }
+#mu_popup_moreOption .mu_CD_opts .mu_col1, #mu_popup_moreOption .mu_CD_opts .mu_col2 { width: 370px; float: left;}
+#mu_popup_moreOption .mu_CD_opts .mu_CD_items { color: #b12323; font-size: 14px; width: 185px; float: left; cursor: pointer; }
+#mu_popup_moreOption .mu_CD_opts .mu_CD_clickBox { clear: both; float: left; background-image: url('../images/foodOrdering/check_box.png'); width: 20px; height: 20px; background-position: -20px 0; }
+#mu_popup_moreOption .mu_CD_opts .mu_CD_items.mu_active .mu_CD_clickBox { background-position: 0; }
+#mu_popup_moreOption .mu_CD_opts .mu_CD_itemName { float: left; line-height: 20px; margin-left: 3px; max-width: 100px; }
+#mu_popup_moreOption .mu_CD_opts .mu_CD_itemPrice { float: right; margin-right: 20px; line-height: 20px; }
+#mu_popup_moreOption .mu_CD_opts textarea { width: 720px;}
+#mu_popup_moreOption .mu_CD_go { text-align: right; margin: 20px 15px 20px 0;}
+#mu_popup_moreOption .mu_CD_go button { font-size: 24px; }
+#mu_popup_moreOption .mu_CD_go .mu_cancel {}
+#mu_popup_moreOption .mu_CD_go .mu_order {}
+
+/* Popup Menu - Cart Details */
+.mu_iosIcon1, .mu_iosIcon2, .mu_iosIcon3 { background: url(../images/foodOrdering/ios_ui.png) no-repeat scroll 0 0; width: 30px; height: 30px;}
+#mu_popup_cartDetails .mu_iosIcon1 { background-position: 0 0;}
+#mu_popup_cartDetails .mu_iosIcon2 { background-position: 0 -30px; float: left; cursor: pointer; margin-left: 29px;}
+#mu_popup_cartDetails .mu_iosIcon3 { background-position: 0 -60px; float: left; cursor: pointer;}
+
+#mu_popup_cartDetails {}
+#mu_popup_cartDetails .mu_CD_main { margin-top: 15px;}
+#mu_popup_cartDetails .mu_CD_main tr { color: #b12323; font-size: 14px; background-image: url(../images/foodOrdering/dottedLine.png); background-repeat: no-repeat; background-position: 30px bottom; }
+#mu_popup_cartDetails .mu_CD_main tr.mu_contentsRow:hover { background-color: #FFFFDF;}
+#mu_popup_cartDetails .mu_CD_main tr.mu_firstRow {  }
+#mu_popup_cartDetails .mu_CD_main tr.mu_lastRow { background-image: none;}
+#mu_popup_cartDetails .mu_CD_main th { color: #5f4e22; font-size: 18px; line-height: 20px; padding-bottom: 10px;}
+#mu_popup_cartDetails .mu_CD_main td { padding-bottom: 10px; padding-top: 5px; vertical-align: middle;}
+#mu_popup_cartDetails .mu_CD_main tr.mu_lastRow td { font-weight: bold;}
+#mu_popup_cartDetails .mu_CD_quantity { width: 30px; float: left; }
+#mu_popup_cartDetails .mu_CD_go { text-align: right; margin: 20px 0 20px 0; }
+#mu_popup_cartDetails .mu_CD_go button.mu_cancel { font-size: 18px; vertical-align: bottom;}
+#mu_popup_cartDetails .mu_CD_go button.mu_order { font-size: 24px; vertical-align: bottom;}
