@@ -131,10 +131,10 @@
 				<div class="mu-stage3-managetools-block">
 					<h3>彈出式選單 (Popup-menu)：</h3>
           <div id="mu-stage3-toolpopup">
-            Click to popup
+            &gt;&gt; Click to popup &lt;&lt; 
           </div>
 				</div>
-				<div class="mu-stage3-managetools-block">
+        <div class="mu-stage3-managetools-block" id="mu-stage3-mtb-generalopt">
 					<h3>其他選項：</h3>
 				</div>
 			</div>

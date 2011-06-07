@@ -632,6 +632,7 @@ class RestaurantAdmin extends Controller {
     $soup = $data->soup;
     $sauce = $data->sauce;
     $staple = $data->staple;
+    $moar = $data->moar_info;
 
     /* check existence */
     $query = $this->db->get_where('menu_food_popupoptions',
@@ -642,11 +643,12 @@ class RestaurantAdmin extends Controller {
                          array('fooType' => $foo_type));
     }
     $this->db->update('menu_food_popupoptions',
-                      array('drink'   => json_encode($drink),
-                            'soup'    => json_encode($soup),
-                            'sauce'   => json_encode($sauce),
-                            'staple'  => json_encode($staple)),
-                      array('fooType' => $foo_type));
+                      array('drink'     => json_encode($drink),
+                            'soup'      => json_encode($soup),
+                            'sauce'     => json_encode($sauce),
+                            'staple'    => json_encode($staple),
+                            'moar_info' => json_encode($moar)),
+                      array('fooType'   => $foo_type));
   }
 
   /* rpc: dump menu_food_popupoptions for a given fooType as json
@@ -692,6 +694,7 @@ class RestaurantAdmin extends Controller {
     $all_soups = array();
     $all_sauces = array();
     $all_staples = array();
+    $all_moars = array();
 
     if (!$opt_row) {
       /* the restaurant haven't added any options */
@@ -710,6 +713,9 @@ class RestaurantAdmin extends Controller {
       $all_staples = json_decode($the_row->staple, true);
       if (!$all_staples)
         $all_staples = array();
+      $all_moars = json_decode($the_row->moar_info, true);
+      if (!$all_moars)
+        $all_moars = array();
     }
 
     /* and add share data */
@@ -722,6 +728,7 @@ class RestaurantAdmin extends Controller {
         $add_soups = json_decode($row->soup, true);
         $add_sauces = json_decode($row->sauce, true);
         $add_staples = json_decode($row->staple, true);
+        $add_moars = json_decode($row->moar_info, true);
 
         if ($add_soups)
           foreach ($add_soups as $key => $val) {
@@ -744,6 +751,13 @@ class RestaurantAdmin extends Controller {
             }
           }
 
+        if ($add_moars)
+          foreach ($add_moars as $key => $val) {
+            if (!array_key_exists($key, $all_moars)) {
+              $all_moars[$key] = 0;  /* share this */
+            }
+          }
+
       }
     }
 
@@ -753,6 +767,7 @@ class RestaurantAdmin extends Controller {
       "soup" => $all_soups,
       "sauce" => $all_sauces,
       "staple" => $all_staples,
+      "moar_info" => $all_moars,
     ));
   }
 
@@ -762,6 +777,9 @@ class RestaurantAdmin extends Controller {
     $jdata = $this->input->post('delete_data');
     $data = json_decode($jdata, true);
     $soup = $data['soup'];
+    $sauce = $data['sauce'];
+    $staple = $data['staple'];
+    $moar = $data['moar_info'];
 
     $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
     $result = $query->result();
@@ -809,6 +827,16 @@ class RestaurantAdmin extends Controller {
           $this->db->update('menu_food_popupoptions',
                             array('staple' => json_encode($staples_here)),
                             array('fooType' => $each_blkid));
+        }
+
+        $moars_here = json_decode($row->moar_info, true);
+        if ($moars_here) {
+          foreach ($moar as $moar_name => $_) {
+            unset($moars_here[$moar_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('moar_info' => json_encode($moars_here)),
+                            array('fooType'   => $each_blkid));
         }
       }
     }

@@ -154,6 +154,8 @@
         $('#mu-res-admin-popup-sauce'));
       var construct_staple_options = item_option_factory('staple',
         $('#mu-res-admin-popup-staple'));
+      var construct_moar_options = item_option_factory('moar_info',
+        $('#mu-res-admin-popup-moar'));
 
 
       /* drink block ctor. data is a object RPC-ed from server  */
@@ -266,6 +268,18 @@
           to_post.staple = staple_data;
 
 
+          /* uploading moar data */
+          moar_data = {};
+          $.each(RMan.popup.moar_info_cells, function (i, item) {
+            var moar_name = item.find('input').val();
+            if (moar_name.trim() == '')  /* ignore empty string */
+              return;
+            var selected  = parseInt(item.attr('selected'));
+            moar_data[moar_name] = selected;
+          });
+          to_post.moar_info = moar_data;
+
+
           /* POST them */
           $.post(post_path + String(food_type), {
             update_data: JSON.stringify(to_post)
@@ -287,6 +301,7 @@
         construct_soup_options(data);
         construct_sauce_options(data);
         construct_staple_options(data);
+        construct_moar_options(data);
       });
 
     });
@@ -310,6 +325,9 @@ editing ...
   </div>
   <div id='mu-res-admin-popup-staple'>
     staple
+  </div>
+  <div id='mu-res-admin-popup-moar'>
+    additional information
   </div>
   updating food info
 </div>
