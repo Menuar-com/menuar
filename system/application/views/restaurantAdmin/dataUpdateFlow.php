@@ -113,6 +113,8 @@
 				<!-- --- Stage3 Form will be added here --- -->
 				<div class="mu-oneCol mu-stage3-add-class"><img src="images/icon_set1/document_add.png" alt="新增類別" /><span>新增類別</span></div>
 			</div>
+
+      <?php /* The management tool starts from here */ ?>
 			<div class="mu-stage3-managecol">
 				<h2><img src="images/restaurantAdmin/mu_stage3_tools_icon.png" /><span>餐單管理工具</span>
 					<div class="clearer"></div>
@@ -128,11 +130,16 @@
 				</div>
 				<div class="mu-stage3-managetools-block">
 					<h3>彈出式選單 (Popup-menu)：</h3>
+          <div id="mu-stage3-toolpopup">
+            &gt;&gt; Click to popup &lt;&lt; 
+          </div>
 				</div>
-				<div class="mu-stage3-managetools-block">
+        <div class="mu-stage3-managetools-block" id="mu-stage3-mtb-generalopt">
 					<h3>其他選項：</h3>
 				</div>
 			</div>
+      <?php /* The management tool ends here */ ?>
+
 		</div>
 		<div id="mu-res-admin-stage4" class="mu-res-admin-stages">
 			<div class="mu-twoCol-container"> 
