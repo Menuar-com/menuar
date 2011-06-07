@@ -60,4 +60,8 @@ $(document).ready(function(){
 		$(this).toggleClass('mu_active');
 	});
 	
+	$('#mu_popup_moreOption .mu_CD_opts .mu_CD_items').live('click', function(){
+		$(this).toggleClass('mu_active');
+	});
+	
 });

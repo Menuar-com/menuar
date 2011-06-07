@@ -5,9 +5,21 @@ $(document).ready(function(){
 	$('.mu_rest_ranking').each(function(){
 		$(this).mu_ranking();
 	});
-	$('#mu_cartTools #mu_cartDetails').click(function(){
-		
+	$('#mu_cartTools #mu_cartDetails').fancybox({
+		centerOnScroll: true,
+		overlayShow: false,
+		transitionIn: 'elastic',
+		scrolling: 'no',
+		height: 480
 	});
+	$('#mu_cartTools #mu_cartClear').fancybox({
+		centerOnScroll: true,
+		overlayShow: false,
+		transitionIn: 'elastic',
+		scrolling: 'no',
+		height: 480
+	});
+	
 });
 </script>
 
@@ -54,7 +66,29 @@ $(document).ready(function(){
 	<div id="mu_foodChoice">
 		<div id="mu_foods">
 			<h4 class="mu_subtitle">餐廳現在提供的食物：</h4>
-			<div class="mu_col1"></div>
+			<div class="mu_col1">
+				<div class="mu_foodBlk">
+					<div class="mu_foodBlkName">
+						<div class="mu-class-icon"></div>
+						<span>中午套餐</span>
+					</div>
+					<div class="mu_entry_wrapper">
+						<div class="mu-type1-entry-row" entryid="1"> <span class="mu-entry-number">1</span> <span class="mu-entry-name">蓮藕炆排骨</span> <span class="mu-entry-price">32</span> </div>
+						<div class="mu-type1-entry-row" entryid="2"> <span class="mu-entry-number">2</span> <span class="mu-entry-name">草菇麵根炆雞</span> <span class="mu-entry-price">14</span> </div>
+						<div class="mu-type1-entry-row" entryid="3"> <span class="mu-entry-number">3</span> <span class="mu-entry-name">香茅牛肉</span> <span class="mu-entry-price">51</span> </div>
+						<div class="mu-type1-entry-row" entryid="4"> <span class="mu-entry-number">4</span> <span class="mu-entry-name">蓮藕馬蹄蒸牛肉餅</span> <span class="mu-entry-price">13</span> </div>
+						<div class="mu-type1-entry-row" entryid="5"> <span class="mu-entry-number">5</span> <span class="mu-entry-name">什錦雞粒玉子豆腐</span> <span class="mu-entry-price">53</span> </div>
+						<div class="mu-type1-entry-row" entryid="6"> <span class="mu-entry-number">6</span> <span class="mu-entry-name">鹹蛋馬蹄蒸肉餅</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="7"> <span class="mu-entry-number">7</span> <span class="mu-entry-name">冬菇炸菜蒸牛肉絲</span> <span class="mu-entry-price">43</span> </div>
+						<div class="mu-type1-entry-row" entryid="8"> <span class="mu-entry-number">8</span> <span class="mu-entry-name">木耳馬蹄蒸肉餅</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="9"> <span class="mu-entry-number">9</span> <span class="mu-entry-name">yu</span> <span class="mu-entry-price">32</span> </div>
+						<div class="mu-type1-entry-row" entryid="10"> <span class="mu-entry-number">10</span> <span class="mu-entry-name">yi</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="11"> <span class="mu-entry-number">11</span> <span class="mu-entry-name">yi</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="12"> <span class="mu-entry-number">12</span> <span class="mu-entry-name">yo</span> <span class="mu-entry-price">11</span> </div>
+					</div>
+				</div>
+				<div class="mu_remarks"></div>
+			</div>
 			<div class="mu_col2"></div>
 			<div class="clearer"></div>
 		</div>
@@ -102,9 +136,286 @@ $(document).ready(function(){
 			</tr>
 		</table>
 		<div id="mu_cartTools">
-			<div id="mu_cartDetails">詳細資料</div>
-			<div id="mu_cartClear">清空美食籃子</div>
+			<div id="mu_cartDetails" href="#mu_popup_cartDetails">更改／詳細資料</div>
+			<div id="mu_cartClear" href="#mu_popup_moreOption">清空美食籃子</div>
 		</div>
 	</div>
 	<div class="clearer"></div>
+</div>
+<div style="display:none">
+	<div id="mu_popup_moreOption">
+		<div class="mu_CD_title">你選擇了：<span class="mu_CD_chosen">茄茸帆立貝有機意粉</span></div>
+		<div class="mu_CD_subTitle">要求多多既你, 仲可以有以下要求:</div>
+		<div class="mu_CD_main">
+			<div class="mu_CD_opts" id="mu_CD_addDrinks">
+				<h6>加飲品</h6>
+				<div class="mu_col1">
+					<h7>熱飲</h7>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">香滑奶茶</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">檸檬蜂蜜</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">香濃咖啡</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">檸檬水</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">朱古力</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">柚子茶</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+				</div>
+				<div class="mu_col2">
+					<h7>凍飲</h7>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">純豆漿</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">可樂</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">七喜</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">香濃咖啡</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">鹹檸檬七喜</div>
+						<div class="mu_CD_itemPrice">+0元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">檸檬利賓納</div>
+						<div class="mu_CD_itemPrice">+999元</div>
+					</div>
+					<div class="mu_CD_items">
+						<div class="mu_CD_clickBox"></div>
+						<div class="mu_CD_itemName">香滑可樂</div>
+						<div class="mu_CD_itemPrice">+99999元</div>
+					</div>
+				</div>
+				<div class="clearer"></div>
+			</div>
+			<div class="mu_CD_opts">
+				<h6>飯/意粉/薯菜</h6>
+				<div class="mu_CD_items">
+					<div class="mu_CD_clickBox"></div>
+					<div class="mu_CD_itemName">飯</div>
+					<div class="mu_CD_itemPrice">+0元</div>
+				</div>
+				<div class="mu_CD_items">
+					<div class="mu_CD_clickBox"></div>
+					<div class="mu_CD_itemName">意粉</div>
+					<div class="mu_CD_itemPrice">+70元</div>
+				</div>
+				<div class="mu_CD_items">
+					<div class="mu_CD_clickBox"></div>
+					<div class="mu_CD_itemName">著菜</div>
+					<div class="mu_CD_itemPrice">+80元</div>
+				</div>
+				<div class="mu_CD_items">
+					<div class="mu_CD_clickBox"></div>
+					<div class="mu_CD_itemName">天使麵</div>
+					<div class="mu_CD_itemPrice">+90元</div>
+				</div>
+				<div class="clearer"></div>
+			</div>
+			<div class="mu_CD_opts">
+				<h6>辣度</h6>
+				<div class="clearer"></div>
+			</div>
+			<div class="mu_CD_opts">
+				<h6>其他要求</h6>
+				<textarea cols="90" rows="3"></textarea>
+				<div class="clearer"></div>
+			</div>
+		</div>
+		<div class="mu_CD_go"> 
+			<script language="javascript">
+				$(function() {
+					$(".mu_CD_go button").button();
+				});
+			</script>
+			<button class="mu_cancel">取消</button>
+			<button class="mu_order">點餐</button>
+		</div>
+	</div>
+	<div id="mu_popup_cartDetails">
+		<div class="mu_CD_title">你選擇了：</div>
+		<div class="mu_CD_main">
+			<div class="mu_foodList">
+				<div class="mu_row mu_fl_r1">
+					<div class="mu_col mu_fl_c1">&nbsp;</div>
+					<div class="mu_col mu_fl_c2">美食</div>
+					<div class="mu_col mu_fl_c3 center">價錢</div>
+					<div class="mu_col mu_fl_c4 center">數量</div>
+					<div class="mu_col mu_fl_c5 center">總價</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">茄茸帆立貝有機意粉<br />
+						加: 可樂 +$2</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">茄茸帆立貝有機意粉<br />
+						加: 凍檸水 +$5, 轉天使麵, 走冰, 少甜)</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">沙律(鮮雜果拼盤+鮮雜果沙律)<br />
+						加: 凍咖啡 +$5, 凱撒沙律 +$20, 走冰, 少甜, <br />
+						多奶</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">車仔麵(魚丸+魚丸+河粉)<br />
+						加: 無</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row mu_fl_rLast">
+					<div class="mu_col mu_fl_c1">&nbsp;</div>
+					<div class="mu_col mu_fl_c2">&nbsp;</div>
+					<div class="mu_col mu_fl_c3">&nbsp;</div>
+					<div class="mu_col mu_fl_c4 center">5</div>
+					<div class="mu_col mu_fl_c5 center">249</div>
+					<div class="clearer"></div>
+				</div>
+			</div>
+			<!--
+			<table width="740" cellpadding="0" cellspacing="0">
+				<tr class="mu_firstRow">
+					<th width="30">&nbsp;</th>
+					<th width="310">美食</th>
+					<th width="125" class="center">價錢</th>
+					<th width="148" class="center">數量</th>
+					<th width="125" class="center">總價</th>
+				</tr>
+				<tr class="mu_contentsRow">
+					<td><div class="mu_iosIcon1"></div></td>
+					<td>茄茸帆立貝有機意粉<br />
+						加: 可樂 +$2</td>
+					<td class="center">45</td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
+					<td class="center">90</td>
+				</tr>
+				<tr class="mu_contentsRow">
+					<td><div class="mu_iosIcon1"></div></td>
+					<td>茄茸帆立貝有機意粉<br />
+						加: 凍檸水 +$5, 轉天使麵, 走冰, 少甜)</td>
+					<td class="center">48</td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
+					<td class="center">48</td>
+				</tr>
+				<tr class="mu_contentsRow">
+					<td><div class="mu_iosIcon1"></div></td>
+					<td>沙律(鮮雜果拼盤+鮮雜果沙律)<br />
+						加: 凍咖啡 +$5, 凱撒沙律 +$20, 走冰, 少甜, <br />
+						多奶</td>
+					<td class="center">68</td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
+					<td class="center">68</td>
+				</tr>
+				<tr class="mu_contentsRow">
+					<td><div class="mu_iosIcon1"></div></td>
+					<td>車仔麵(魚丸+魚丸+河粉)<br />
+						加: 無</td>
+					<td class="center">43</td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
+					<td class="center">43</td>
+				</tr>
+				<tr class="mu_lastRow">
+					<td></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td class="center">5</td>
+					<td class="center">249</td>
+				</tr>
+			</table>
+			--> 
+		</div>
+		<div class="mu_CD_go"> 
+			<script language="javascript">
+				$(function() {
+					$(".mu_CD_go button").button();
+				});
+			</script>
+			<button class="mu_cancel">取消</button>
+			<button class="mu_order">賣單</button>
+		</div>
+	</div>
 </div>
