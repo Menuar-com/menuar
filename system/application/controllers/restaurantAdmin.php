@@ -654,6 +654,16 @@ class RestaurantAdmin extends Controller {
     $result = $query->result();
     $this_row = $result[0];
     $owner = $this_row->blkOwner;
+    $blk_tp = $this_row->blkClass;
+
+    /* get all blockID for this owner 'cause we need to share them */
+    $query = $this->db->get_where('menu_block', array('blkOwner' => $owner));
+    $rows = $query->result();
+    $all_blkids = array();
+		foreach ($rows as $idx => $value) {
+      $all_blkids[] = $value->blkID;
+    }
+
 
     $all_drinks_query = $this->db->get_where('menu_drink',
                             array('driOwner' => $owner));
@@ -685,9 +695,53 @@ class RestaurantAdmin extends Controller {
     } else {
       $the_row = $opt_row[0];
       $sel_drinks = json_decode($the_row->drink);
-      $all_soups = json_decode($the_row->soup);
-      $all_sauces = json_decode($the_row->sauce);
-      $all_staples = json_decode($the_row->staple);
+      if (!$sel_drinks)
+        $sel_drinks = array();
+
+      $all_soups = json_decode($the_row->soup, true);
+      if (!$all_soups)
+        $all_soups = array();
+      $all_sauces = json_decode($the_row->sauce, true);
+      if (!$all_sauces)
+        $all_sauces = array();
+      $all_staples = json_decode($the_row->staple, true);
+      if (!$all_staples)
+        $all_staples = array();
+    }
+
+    /* and add share data */
+		foreach ($all_blkids as $idx => $each_blkid) {
+      /* echo "loop for $each_blkid\n"; */
+      $query = $this->db->get_where('menu_food_popupoptions',
+                                    array('fooType' => $each_blkid), 1);
+      $row = $query->result();
+      if ($row) {
+        $row = $row[0];
+        $add_soups = json_decode($row->soup, true);
+        $add_sauces = json_decode($row->sauce, true);
+        $add_staples = json_decode($row->staple, true);
+        /*
+        print_r($row);
+        echo "loop for $each_blkid\n";
+        print_r($add_soups);
+        echo "current array = ";
+        print_r($all_soups);
+        echo "\n";
+         */
+        if ($add_soups) {
+          foreach ($add_soups as $key => $val) {
+            /*
+            echo "key = $key, which in_array() = ";
+            print_r(array_key_exists($key, $all_soups));
+            echo "\n";
+             */
+            if (!array_key_exists($key, $all_soups)) {
+              $all_soups[$key] = 0;  /* share this */
+            }
+          }
+        }
+        echo "\n\n";
+      }
     }
 
     echo json_encode(array(
@@ -697,6 +751,45 @@ class RestaurantAdmin extends Controller {
       "sauces" => $all_sauces,
       "staples" => $all_staples,
     ));
+  }
+
+
+  /* delete the given items */
+  function resDeleteFoodInfoData($foo_type = -1) {
+    $jdata = $this->input->post('delete_data');
+    $data = json_decode($jdata);
+    $soup = $data->soup;
+
+    $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
+    $result = $query->result();
+    $this_row = $result[0];
+    $owner = $this_row->blkOwner;
+
+    $query = $this->db->get_where('menu_block', array('blkOwner' => $owner));
+    $rows = $query->result();
+    $all_blkids = array();
+		foreach ($rows as $idx => $value) {
+      $all_blkids[] = $value->blkID;
+    }
+
+		foreach ($all_blkids as $idx => $each_blkid) {
+      /* echo "loop for $each_blkid\n"; */
+      $query = $this->db->get_where('menu_food_popupoptions',
+                                    array('fooType' => $each_blkid), 1);
+      $row = $query->result();
+      if ($row) {
+        $row = $row[0];
+        $soups_here = json_decode($row->soup, true);
+        if ($soups_here) {
+          foreach ($soup as $soup_name => $_) {
+            unset($soups_here[$soup_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('soup' => json_encode($soups_here)),
+                            array('fooType' => $each_blkid));
+        }
+      }
+    }
   }
 }
 
