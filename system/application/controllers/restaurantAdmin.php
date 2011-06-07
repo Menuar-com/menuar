@@ -643,7 +643,6 @@ class RestaurantAdmin extends Controller {
                       array('drink' => json_encode($drink),
                             'soup' => json_encode($soup)),
                       array('fooType' => $foo_type));
-    echo ">> inserting done <<\n";
   }
 
   /* rpc: dump menu_food_popupoptions for a given fooType as json
@@ -720,21 +719,9 @@ class RestaurantAdmin extends Controller {
         $add_soups = json_decode($row->soup, true);
         $add_sauces = json_decode($row->sauce, true);
         $add_staples = json_decode($row->staple, true);
-        /*
-        print_r($row);
-        echo "loop for $each_blkid\n";
-        print_r($add_soups);
-        echo "current array = ";
-        print_r($all_soups);
-        echo "\n";
-         */
+
         if ($add_soups) {
           foreach ($add_soups as $key => $val) {
-            /*
-            echo "key = $key, which in_array() = ";
-            print_r(array_key_exists($key, $all_soups));
-            echo "\n";
-             */
             if (!array_key_exists($key, $all_soups)) {
               $all_soups[$key] = 0;  /* share this */
             }
@@ -754,11 +741,11 @@ class RestaurantAdmin extends Controller {
   }
 
 
-  /* delete the given items */
+  /* delete the given items. */
   function resDeleteFoodInfoData($foo_type = -1) {
     $jdata = $this->input->post('delete_data');
-    $data = json_decode($jdata);
-    $soup = $data->soup;
+    $data = json_decode($jdata, true);
+    $soup = $data['soup'];
 
     $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
     $result = $query->result();
@@ -773,7 +760,6 @@ class RestaurantAdmin extends Controller {
     }
 
 		foreach ($all_blkids as $idx => $each_blkid) {
-      /* echo "loop for $each_blkid\n"; */
       $query = $this->db->get_where('menu_food_popupoptions',
                                     array('fooType' => $each_blkid), 1);
       $row = $query->result();

@@ -25,6 +25,9 @@
       /* UPDATE path */
       var post_path = 'online/restaurantAdmin/resUpdatefoodInfoData/';
 
+      /* DELETE path */
+      var del_path = 'online/restaurantAdmin/resDeletefoodInfoData/';
+
       /* dont use getJSON because it WILL FAIL SILENTLY */
       $.get(fetch_path + food_type, function (data) {
         data = $.parseJSON(data);
@@ -37,6 +40,8 @@
       var wrapper = $('#mu-res-admin-popup-wrapper');
       wrapper.css('width', '720px');
 
+      var item_option_factory = function (item_name, item_dom) {
+      };
 
       /* -*- SOUP option ctor -*- */
       var construct_soup_options = function (data) {
@@ -75,8 +80,22 @@
           del_this.click(function (e) {
             var par = $($(this).parent());
             $.each(table_cells, function (key, val) {
-              if ($(val)[0] == par[0])
+              if ($(val)[0] == par[0]) {
+                /* got this cell -- delete it
+                   and issue a deletion to the server */
+                var to_del = {};
+                var soup_name = par.find('input').val();
+                to_del[soup_name] = 1;
+
+                $.post(del_path + String(food_type), {
+                  delete_data: JSON.stringify({
+                                 soup: to_del
+                               })
+                }, function (res) {
+                  console.log('deletion succ', res);
+                });
                 table_cells[key] = null;
+              }
             });
             construct_table();  /* resize the table */
           });
