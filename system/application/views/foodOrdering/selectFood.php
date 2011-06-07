@@ -12,6 +12,14 @@ $(document).ready(function(){
 		scrolling: 'no',
 		height: 480
 	});
+	$('#mu_cartTools #mu_cartClear').fancybox({
+		centerOnScroll: true,
+		overlayShow: false,
+		transitionIn: 'elastic',
+		scrolling: 'no',
+		height: 480
+	});
+	
 });
 </script>
 
@@ -58,7 +66,29 @@ $(document).ready(function(){
 	<div id="mu_foodChoice">
 		<div id="mu_foods">
 			<h4 class="mu_subtitle">餐廳現在提供的食物：</h4>
-			<div class="mu_col1"></div>
+			<div class="mu_col1">
+				<div class="mu_foodBlk">
+					<div class="mu_foodBlkName">
+						<div class="mu-class-icon"></div>
+						<span>中午套餐</span>
+					</div>
+					<div class="mu_entry_wrapper">
+						<div class="mu-type1-entry-row" entryid="1"> <span class="mu-entry-number">1</span> <span class="mu-entry-name">蓮藕炆排骨</span> <span class="mu-entry-price">32</span> </div>
+						<div class="mu-type1-entry-row" entryid="2"> <span class="mu-entry-number">2</span> <span class="mu-entry-name">草菇麵根炆雞</span> <span class="mu-entry-price">14</span> </div>
+						<div class="mu-type1-entry-row" entryid="3"> <span class="mu-entry-number">3</span> <span class="mu-entry-name">香茅牛肉</span> <span class="mu-entry-price">51</span> </div>
+						<div class="mu-type1-entry-row" entryid="4"> <span class="mu-entry-number">4</span> <span class="mu-entry-name">蓮藕馬蹄蒸牛肉餅</span> <span class="mu-entry-price">13</span> </div>
+						<div class="mu-type1-entry-row" entryid="5"> <span class="mu-entry-number">5</span> <span class="mu-entry-name">什錦雞粒玉子豆腐</span> <span class="mu-entry-price">53</span> </div>
+						<div class="mu-type1-entry-row" entryid="6"> <span class="mu-entry-number">6</span> <span class="mu-entry-name">鹹蛋馬蹄蒸肉餅</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="7"> <span class="mu-entry-number">7</span> <span class="mu-entry-name">冬菇炸菜蒸牛肉絲</span> <span class="mu-entry-price">43</span> </div>
+						<div class="mu-type1-entry-row" entryid="8"> <span class="mu-entry-number">8</span> <span class="mu-entry-name">木耳馬蹄蒸肉餅</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="9"> <span class="mu-entry-number">9</span> <span class="mu-entry-name">yu</span> <span class="mu-entry-price">32</span> </div>
+						<div class="mu-type1-entry-row" entryid="10"> <span class="mu-entry-number">10</span> <span class="mu-entry-name">yi</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="11"> <span class="mu-entry-number">11</span> <span class="mu-entry-name">yi</span> <span class="mu-entry-price">12</span> </div>
+						<div class="mu-type1-entry-row" entryid="12"> <span class="mu-entry-number">12</span> <span class="mu-entry-name">yo</span> <span class="mu-entry-price">11</span> </div>
+					</div>
+				</div>
+				<div class="mu_remarks"></div>
+			</div>
 			<div class="mu_col2"></div>
 			<div class="clearer"></div>
 		</div>
@@ -239,6 +269,86 @@ $(document).ready(function(){
 	<div id="mu_popup_cartDetails">
 		<div class="mu_CD_title">你選擇了：</div>
 		<div class="mu_CD_main">
+			<div class="mu_foodList">
+				<div class="mu_row mu_fl_r1">
+					<div class="mu_col mu_fl_c1">&nbsp;</div>
+					<div class="mu_col mu_fl_c2">美食</div>
+					<div class="mu_col mu_fl_c3 center">價錢</div>
+					<div class="mu_col mu_fl_c4 center">數量</div>
+					<div class="mu_col mu_fl_c5 center">總價</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">茄茸帆立貝有機意粉<br />
+						加: 可樂 +$2</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">茄茸帆立貝有機意粉<br />
+						加: 凍檸水 +$5, 轉天使麵, 走冰, 少甜)</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">沙律(鮮雜果拼盤+鮮雜果沙律)<br />
+						加: 凍咖啡 +$5, 凱撒沙律 +$20, 走冰, 少甜, <br />
+						多奶</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row">
+					<div class="mu_col mu_fl_c1">
+						<div class="mu_iosIcon1"></div>
+					</div>
+					<div class="mu_col mu_fl_c2">車仔麵(魚丸+魚丸+河粉)<br />
+						加: 無</div>
+					<div class="mu_col mu_fl_c3 center">45</div>
+					<div class="mu_col mu_fl_c4 center">
+						<div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div>
+					</div>
+					<div class="mu_col mu_fl_c5 center">90</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="mu_row mu_fl_rLast">
+					<div class="mu_col mu_fl_c1">&nbsp;</div>
+					<div class="mu_col mu_fl_c2">&nbsp;</div>
+					<div class="mu_col mu_fl_c3">&nbsp;</div>
+					<div class="mu_col mu_fl_c4 center">5</div>
+					<div class="mu_col mu_fl_c5 center">249</div>
+					<div class="clearer"></div>
+				</div>
+			</div>
+			<!--
 			<table width="740" cellpadding="0" cellspacing="0">
 				<tr class="mu_firstRow">
 					<th width="30">&nbsp;</th>
@@ -252,7 +362,9 @@ $(document).ready(function(){
 					<td>茄茸帆立貝有機意粉<br />
 						加: 可樂 +$2</td>
 					<td class="center">45</td>
-					<td><div class="mu_iosIcon2"></div><input class="mu_CD_quantity" /><div class="mu_iosIcon3"></div></td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
 					<td class="center">90</td>
 				</tr>
 				<tr class="mu_contentsRow">
@@ -260,7 +372,9 @@ $(document).ready(function(){
 					<td>茄茸帆立貝有機意粉<br />
 						加: 凍檸水 +$5, 轉天使麵, 走冰, 少甜)</td>
 					<td class="center">48</td>
-					<td><div class="mu_iosIcon2"></div><input class="mu_CD_quantity" /><div class="mu_iosIcon3"></div></td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
 					<td class="center">48</td>
 				</tr>
 				<tr class="mu_contentsRow">
@@ -269,7 +383,9 @@ $(document).ready(function(){
 						加: 凍咖啡 +$5, 凱撒沙律 +$20, 走冰, 少甜, <br />
 						多奶</td>
 					<td class="center">68</td>
-					<td><div class="mu_iosIcon2"></div><input class="mu_CD_quantity" /><div class="mu_iosIcon3"></div></td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
 					<td class="center">68</td>
 				</tr>
 				<tr class="mu_contentsRow">
@@ -277,7 +393,9 @@ $(document).ready(function(){
 					<td>車仔麵(魚丸+魚丸+河粉)<br />
 						加: 無</td>
 					<td class="center">43</td>
-					<td><div class="mu_iosIcon2"></div><input class="mu_CD_quantity" /><div class="mu_iosIcon3"></div></td>
+					<td><div class="mu_iosIcon2"></div>
+						<input class="mu_CD_quantity" />
+						<div class="mu_iosIcon3"></div></td>
 					<td class="center">43</td>
 				</tr>
 				<tr class="mu_lastRow">
@@ -288,6 +406,7 @@ $(document).ready(function(){
 					<td class="center">249</td>
 				</tr>
 			</table>
+			--> 
 		</div>
 		<div class="mu_CD_go"> 
 			<script language="javascript">

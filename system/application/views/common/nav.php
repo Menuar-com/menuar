@@ -10,7 +10,7 @@
 				</li>
 				<li>
 					<div id="mu-nav-icons-C" class="mu-nav-icons"><img src="images/nav/mu_nav_icons.png" alt="埋單" /></div>
-					<a href="#">埋單</a>
+					<a href="online/checkOut.html">埋單</a>
 				</li>
 				<li>
 					<div id="mu-nav-icons-D" class="mu-nav-icons"><img src="images/nav/mu_nav_icons.png" alt="優惠" /></div>

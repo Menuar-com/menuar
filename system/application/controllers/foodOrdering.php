@@ -20,7 +20,7 @@ class FoodOrdering extends Controller {
 		
 		$this->template->write_view('navBar', 'common/nav');
 		$this->template->write_view('loginStatus', 'common/loginStatus','',true);
-		$this->template->write_view('content', 'foodOrdering/foodOrderingFlow.php');
+		$this->template->write_view('content', 'foodOrdering/foodOrderingFlow');
 		$this->template->render();
 	}
 	

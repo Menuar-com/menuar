@@ -9,18 +9,19 @@ class CheckOut extends Controller {
 	
 	function index()
 	{
-		/*if(strstr($_SERVER['HTTP_USER_AGENT'],'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'],'iPod')){
-			header('Location: http://menuar.com/online/iphone.html');
-			exit();
-		} else {*/
-		if (!$this->MemberSystem->isLogin()){
-			$this->template->write_view('freeReg', 'common/freereg');
-		}
+		$this->template->add_css('style/checkOut.css');
+		$this->template->add_css('style/ui-lightness/jquery-ui-1.8.9.custom.css');
+		$this->template->add_css('plugin/fileUpload/jquery.fileupload-ui.css');
+		
+		$this->template->add_js('plugin/timepicker/jquery-ui-timepicker-addon.js');
+		$this->template->add_js('plugin/fileUpload/jquery.fileupload.js');
+		$this->template->add_js('plugin/fileUpload/jquery.fileupload-ui.js');
+		$this->template->add_js('script/foodOrdering.js');
+		
 		$this->template->write_view('navBar', 'common/nav');
 		$this->template->write_view('loginStatus', 'common/loginStatus','',true);
-		$this->template->write_view('content', 'main');
+		$this->template->write_view('content', 'checkOut/main');
 		$this->template->render();
-		//}
 	}
 	
 }

@@ -68,7 +68,7 @@
 
 #mu_foodChoice { float: left; width: 640px; }
 #mu_foodChoice > div { margin-bottom: 20px; }
-#mu_foodChoice .mu_subtitle { color: #5f4e22; font-size: 24px; line-height: 30px; font-weight: normal; }
+#mu_foodChoice h4.mu_subtitle { color: #5f4e22; font-size: 24px; line-height: 30px; font-weight: normal; padding-bottom: 10px;}
 
 #mu_cart { float: right; width: 200px; background-color: #fffaec; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 5px;}
 #mu_cart h5#mu_cartName { background-color: #fff7df; border: solid 1px #f2dda5; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; padding: 5px; color: #9d4f29; font-size: 18px; text-align: center; line-height: 30px;}
@@ -83,6 +83,18 @@
 #mu_cart #mu_cartTools { font-size: 14px; color: #1e00ff; margin-top: 20px;}
 #mu_cart #mu_cartTools > div { float: left; margin-left: 8px; cursor: pointer;}
 #mu_cart #mu_cartTools > div:hover { text-decoration: underline;}
+
+/* Food Block */
+#mu_foodChoice .mu_col1 { float: left; width: 310px;}
+#mu_foodChoice .mu_col2 { float: left; width: 310px; margin-left: 20px;}
+#mu_foodChoice .mu_foodBlk {background-color: #FFFAEC; border: 1px solid #F2DDA5; margin-bottom: 10px; padding: 5px;}
+#mu_foodChoice .mu_foodBlkName { height: 40px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:1px solid #ffd665; background-color: #fff7df; text-align: center; margin-bottom: 10px; position: relative;}
+#mu_foodChoice .mu_foodBlkName span { line-height: 40px; color: #9d4f29; font-size: 20px; }
+#mu_foodChoice .mu_foodBlkName .mu-class-icon { position: absolute; top: 1px; left: 20px; background: url('../images/mu_mealset_icon.png') no-repeat scroll 0 0 transparent; width: 40px; height: 40px;}
+#mu_foodChoice .mu_entry_wrapper { color: #888272; font-size: 16px; padding: 0 12px; line-height: 24px;}
+#mu_foodChoice .mu_entry_wrapper .mu-drink-entry-row:hover, #mu_foodChoice .mu_entry_wrapper .mu-type1-entry-row:hover  { background-color: #FFF7DF;}
+#mu_foodChoice .mu_entry_wrapper .mu-entry-price { float: right;}
+
 
 /* Popup Menu - Common */
 .mu_CD_title { color: #9d4f29; font-size: 24px; line-height: 30px;}
@@ -114,14 +126,19 @@
 
 #mu_popup_cartDetails {}
 #mu_popup_cartDetails .mu_CD_main { margin-top: 15px;}
-#mu_popup_cartDetails .mu_CD_main tr { color: #b12323; font-size: 14px; background-image: url(../images/foodOrdering/dottedLine.png); background-repeat: no-repeat; background-position: 30px bottom; }
-#mu_popup_cartDetails .mu_CD_main tr.mu_contentsRow:hover { background-color: #FFFFDF;}
-#mu_popup_cartDetails .mu_CD_main tr.mu_firstRow {  }
-#mu_popup_cartDetails .mu_CD_main tr.mu_lastRow { background-image: none;}
-#mu_popup_cartDetails .mu_CD_main th { color: #5f4e22; font-size: 18px; line-height: 20px; padding-bottom: 10px;}
-#mu_popup_cartDetails .mu_CD_main td { padding-bottom: 10px; padding-top: 5px; vertical-align: middle;}
-#mu_popup_cartDetails .mu_CD_main tr.mu_lastRow td { font-weight: bold;}
+
 #mu_popup_cartDetails .mu_CD_quantity { width: 30px; float: left; }
 #mu_popup_cartDetails .mu_CD_go { text-align: right; margin: 20px 0 20px 0; }
 #mu_popup_cartDetails .mu_CD_go button.mu_cancel { font-size: 18px; vertical-align: bottom;}
 #mu_popup_cartDetails .mu_CD_go button.mu_order { font-size: 24px; vertical-align: bottom;}
+
+#mu_popup_cartDetails .mu_row { color: #b12323; font-size: 14px; background-image: url(../images/foodOrdering/dottedLine.png); background-repeat: no-repeat; background-position: 30px bottom; padding: 7px 0; }
+#mu_popup_cartDetails .mu_fl_r1 {color: #5f4e22; font-size: 18px; line-height: 20px; padding-bottom: 10px;}
+#mu_popup_cartDetails .mu_fl_rLast { font-weight: bold; background-image: none; }
+#mu_popup_cartDetails .mu_col { float: left;}
+#mu_popup_cartDetails .mu_fl_c1 { clear: both; width: 30px;}
+#mu_popup_cartDetails .mu_fl_c2 { width: 310px;}
+#mu_popup_cartDetails .mu_fl_c3 { width: 125px;}
+#mu_popup_cartDetails .mu_fl_c4 { width: 148px;}
+#mu_popup_cartDetails .mu_fl_c5 { width: 125px;}
+
