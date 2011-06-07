@@ -1,0 +1,29 @@
+single_sel:
+{
+  note: text
+  serving_time: datetime
+}
+
+double_sel:
+{
+  note: text
+  serving_time: datetime
+  num_of_sel: int
+  price: number
+  additional_opt: boolean
+  additional_price: number
+}
+
+ncn_sel:
+{
+  note: text
+  serving_time: datetime
+  num_of_sel_a: int
+  num_of_sel_b: int
+  price: number
+  additional_opt_a: boolean
+  additional_price_a: number
+  additional_opt_b: boolean
+  additional_price_b: number
+}
+

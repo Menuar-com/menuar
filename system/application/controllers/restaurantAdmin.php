@@ -1,0 +1,847 @@
+<?php
+
+class RestaurantAdmin extends Controller {
+
+	function RestaurantAdmin()
+	{
+		parent::Controller();	
+	}
+	
+	function index()
+	{
+    /* auth check: this->MemberSystem->isLogin() */
+		if (!$this->MemberSystem->isLogin()) {
+			exit('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />請先登入，並升級成為餐廳管理賬號。');
+		} else if (!$this->MemberSystem->isResOwner()) {
+			exit('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />請升級成為餐廳管理賬號。');
+		}
+		$this->template->add_css('style/restaurantAdmin.css');
+		$this->template->add_css('style/ui-lightness/jquery-ui-1.8.9.custom.css');
+		$this->template->add_css('plugin/fileUpload/jquery.fileupload-ui.css');
+		
+		$this->template->add_js('plugin/timepicker/jquery-ui-timepicker-addon.js');
+		$this->template->add_js('plugin/fileUpload/jquery.fileupload.js');
+		$this->template->add_js('plugin/fileUpload/jquery.fileupload-ui.js');
+		
+		$this->template->add_js('script/restaurantAdmin.js');
+
+    /* the page body */
+		$this->template->write_view('content', 'restaurantAdmin/dataUpdateFlow');
+		$this->template->write_view('navBar', 'restaurantAdmin/nav');
+		$this->template->render();
+	}
+	
+	
+	function stage2dataUpdate()
+	{
+		$inputData = $this->input->post('stage2data');
+		$stage2DataJson = json_encode($inputData);
+		set_cookie('stage2DataJson', $stage2DataJson);
+	}
+	
+	
+	function tempLogin($pass)
+	{
+		if ($pass == '123') {
+			$session_data = array(
+				'userID'	=> '2',
+				'email'		=> "cksam@ust.hk",
+				'login'		=> TRUE
+			);
+			$this->session->set_userdata($session_data);
+			echo 'login';
+		}
+	}
+	
+	function imageUpload($uploadType)
+	{
+		if ($uploadType == NULL) exit("Illegal hack to system");
+		
+		// Initialization
+		if ($uploadType == "reslogo") {
+			$uploadPath = "upload/img_reslogo/";
+			$dimention['width'] = 100;
+			$dimention['height'] = 200;
+		} else if ($uploadType == "resPhoto") {
+			$uploadPath = "upload/img_resPhoto/";
+			$dimention['width'] = 600;
+			$dimention['height'] = 480;
+		} else {
+			exit("System error");
+		}
+		
+		$file = $_FILES['file'];
+		
+		// Check condition
+		if ($file['type'] == "image/gif");
+		elseif ($file['type'] == "image/jpg");
+		elseif ($file['type'] == "image/jpeg");
+		elseif ($file['type'] == "image/bmp");
+		elseif ($file['type'] == "image/png");
+		else
+			return('File should be image');
+		
+		if ($file['size'] > 3145728)
+			return('File size should be lower then 3145728byte (3MB)');
+		
+		// Resize the image
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $file['tmp_name'];
+		$config['maintain_ratio'] = TRUE;
+		$config['width'] = $dimention['width'];
+		$config['height'] = $dimention['height'];
+		$config['wm_text'] = 'testing123';
+		$config['wm_type'] = 'text';
+		
+		
+		$this->load->library('image_lib', $config); 
+		$this->image_lib->resize();
+		$file_ext = substr(strrchr($file['name'], '.'), 1);
+		move_uploaded_file($file['tmp_name'], $uploadPath.$this->session->userdata('userID').'.'.$file_ext);
+		
+		$outputArray = array(
+			'imgPath'	=> $uploadPath.$this->session->userdata('userID').'.'.$file_ext,
+			'imgSize'	=> $file['size'],
+			'imgName'	=> $this->session->userdata('userID').'.'.$file_ext
+		);
+		echo json_encode($outputArray);
+	}
+	
+
+  /* rpc: get json data.
+   * @param stagenumber: stageX, where X is 1 2 3 or 4.
+   * @display: a json serialized string containing data
+   */
+	function resGetData($stagenumber = NULL)
+	{
+    /* XXX: auth */
+		if (($this->input->post('ssCode') != '3H98Ci11i2tE') || ($stagenumber == NULL) || ($this->session->userdata('userID') == NULL)) exit('No direct script access allowed');
+
+		$uid = $this->session->userdata('userID');
+		switch ($stagenumber){
+			case 'stage1':
+				$this->db->where('resID', $uid);
+				$query = $this->db->get('restaurantinfo');
+				
+				
+				if ($query->num_rows() > 0)	{
+					$row_data = $query->result();
+					$output_data = array(
+						'email'			=> $row_data[0]->resLoginName,
+						'resName'		=> $row_data[0]->resName,
+						'resOpenTime'	=> $row_data[0]->resOpenTime,
+						'resCloseTime'	=> $row_data[0]->resCloseTime,
+						'resAddress'	=> $row_data[0]->resAddress,
+						'resTel'		=> $row_data[0]->resPhone,
+						'resPhoto'		=> $row_data[0]->resPhoto,
+						'resTM'			=> $row_data[0]->resLogo,
+						'lowestPrice'	=> $row_data[0]->resPriceLimit,
+						'resDescript'	=> $row_data[0]->resDescription,
+						'resNotics'		=> $row_data[0]->resNotics
+					);
+					echo json_encode($output_data);
+				} else {
+					echo 'NoData';
+					return;
+				}
+				
+				break;
+			case 'stage2':
+				$output_data = NULL;
+				$query = $this->db->query("SELECT * FROM `menu_block` WHERE `blkClass` = 0 AND `blkOwner` = ".$uid." ORDER BY `blkCol` ASC, `blkPosition` ASC");
+				if ($query->num_rows() > 0)	{
+					$row_data = $query->result();
+					foreach ($row_data as $key => $value) {
+						$output_data1[$key] = array(
+							's2typeID'			=> $value->blkID,
+							's2typeName'		=> $value->blkName,
+							's2typeType'		=> $value->blkType,
+							'blkCol'			=> $value->blkCol,
+							'blkPosition'		=> $value->blkPosition
+						);
+						
+					}
+					$output_data["type"] = $output_data1;
+				} else {
+					echo 'NoData';
+					return;
+				}
+			
+			
+				$this->db->where('driOwner', $uid);
+				$this->db->order_by("driID", "asc"); 
+				$query = $this->db->get('drink');
+				
+				if ($query->num_rows() > 0)	{
+					$row_data = $query->result();
+					foreach ($row_data as $key => $value) {
+						$output_data2[$key] = array(
+							's2entryType'	=> $value->driType,
+							's2entryName'	=> $value->driName,
+							's2entryPrice'	=> $value->driPrice
+						);
+					}
+					$output_data["entry"] = $output_data2;
+				} else {
+					echo 'NoData';
+					return;
+				}
+				echo json_encode($output_data);
+				break;
+
+      /* this is what i'm doing... (tim) */
+			case 'stage3':
+				$output_data = NULL;
+				
+				$query0 = $this->db->query("SELECT * FROM `menu_block` WHERE `blkClass` != 0 AND `blkOwner` = ".$uid." ORDER BY `blkCol` ASC, `blkPosition` ASC");
+				
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query1 = $this->db->get('food_type1');
+        /* type1: single choice items */
+
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query2 = $this->db->get('food_type2');
+        /* type2: multiple choice items */
+				
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query3 = $this->db->get('food_type3');
+        /* type3: select multiple from multiple items */
+				
+				
+				if ($query0->num_rows() > 0) {
+					$row_data = $query0->result();
+					foreach ($row_data as $key => $value) {
+						$output_data0[$key] = array(
+							's3FormID'		=> $value->blkID,
+							's3FormType'	=> $value->blkType,
+							's3FormName'	=> $value->blkName,
+							's3FormClass'	=> $value->blkClass,
+							'blkPosition'	=> $value->blkPosition,
+							'blkCol'		=> $value->blkCol
+						);
+					}
+					$output_data["type"] = $output_data0;
+				} else ( $output_data["type"] = array());
+				
+				if ($query1->num_rows() > 0) {
+					$row_data = $query1->result();
+					foreach ($row_data as $key => $value) {
+						$output_data1[$key] = array(
+							's3entryType'	=> $value->fooType,
+							's3entryName'	=> $value->fooName,
+							's3entryPrice'	=> $value->fooPrice
+						);
+					}
+					$output_data["entry1"] = $output_data1;
+				} else ($output_data["entry1"] = array());
+				
+				if ($query2->num_rows() > 0) {
+					$row_data = $query2->result();
+					foreach ($row_data as $key => $value) {
+						$output_data2[$key] = array(
+							's3entryType'	=> $value->fooType,
+							's3entryName'	=> $value->fooName
+						);
+					}
+					$output_data["entry2"] = $output_data2;
+				} else ($output_data["entry2"] = array());
+				
+				
+				
+				if ($query3->num_rows() > 0) {
+					$row_data = $query3->result();
+					foreach ($row_data as $key => $value) {
+						$output_data3[$key] = array(
+							's3entryType'	=> $value->fooType,
+							's3entryName'	=> $value->fooName,
+							's3entryAB'		=> $value->fooAB
+						);
+					}
+					$output_data["entry3"] = $output_data3;
+				} else ($output_data["entry3"] = array());
+				
+
+				$output_data["entry"] = array_merge($output_data["entry1"], $output_data["entry2"], $output_data["entry3"]);
+				
+				if ($output_data["entry"] == NULL) {
+					echo 'NoData';
+					return;
+				}
+				
+				unset($output_data["entry1"]);
+				unset($output_data["entry2"]);
+				unset($output_data["entry3"]);
+				
+				echo json_encode($output_data);
+				
+				break;
+				
+			case 'stage4':
+				$output_data = NULL;
+				
+				$query = $this->db->query("SELECT * FROM `menu_block` WHERE `blkOwner` = ".$uid." ORDER BY `blkCol` ASC, `blkPosition` ASC");
+				
+				if ($query->num_rows() > 0)	{
+					$row_data = $query->result();
+					foreach ($row_data as $key => $value) {
+						$output_data1[$key] = array(
+							'blockID'			=> $value->blkID,
+							'blockName'			=> $value->blkName,
+							'blockType'			=> $value->blkType,
+							'blockClass'		=> $value->blkClass,
+							'blockCol'			=> $value->blkCol
+						);
+						
+					}
+					$output_data["type"] = $output_data1;
+				} else {
+					echo 'NoData';
+					return;
+				}
+				
+				$this->db->where('driOwner', $uid);
+				$this->db->order_by("driID", "asc"); 
+				$query0 = $this->db->get('drink');
+				
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query1 = $this->db->get('food_type1');
+				
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query2 = $this->db->get('food_type2');
+				
+				$this->db->where('fooOwner', $uid);
+				$this->db->order_by("fooID", "asc");
+				$query3 = $this->db->get('food_type3');
+				
+				if ($query0->num_rows() > 0)	{
+					$row_data = $query0->result();
+					foreach ($row_data as $key => $value) {
+						$output_data0[$key] = array(
+							'entryType'	=> $value->driType,
+							'entryName'	=> $value->driName,
+							'entryPrice'	=> $value->driPrice
+						);
+					}
+					$output_data["entry0"] = $output_data0;
+				} else ($output_data["entry0"] = array());
+				
+				if ($query1->num_rows() > 0) {
+					$row_data = $query1->result();
+					foreach ($row_data as $key => $value) {
+						$output_data1[$key] = array(
+							'entryType'	=> $value->fooType,
+							'entryName'	=> $value->fooName,
+							'entryPrice'	=> $value->fooPrice
+						);
+					}
+					$output_data["entry1"] = $output_data1;
+				} else ($output_data["entry1"] = array());
+				
+				if ($query2->num_rows() > 0) {
+					$row_data = $query2->result();
+					foreach ($row_data as $key => $value) {
+						$output_data2[$key] = array(
+							'entryType'	=> $value->fooType,
+							'entryName'	=> $value->fooName
+						);
+					}
+					$output_data["entry2"] = $output_data2;
+				} else ($output_data["entry2"] = array());
+				
+				if ($query3->num_rows() > 0) {
+					$row_data = $query3->result();
+					foreach ($row_data as $key => $value) {
+						$output_data3[$key] = array(
+							'entryType'	=> $value->fooType,
+							'entryName'	=> $value->fooName,
+							'entryAB'		=> $value->fooAB
+						);
+					}
+					$output_data["entry3"] = $output_data3;
+				} else ($output_data["entry3"] = array());
+				
+
+				$output_data["entry"] = array_merge($output_data["entry0"], $output_data["entry1"], $output_data["entry2"], $output_data["entry3"]);
+				
+				if ($output_data["entry"] == NULL){
+					echo 'NoData';
+					return;
+				}
+				
+				unset($output_data["entry0"]);
+				unset($output_data["entry1"]);
+				unset($output_data["entry2"]);
+				unset($output_data["entry3"]);
+				
+				echo json_encode($output_data);
+				
+				break;
+				
+		}
+	}
+
+	function resAdminDataUpdate($stagenumber = NULL)
+	{
+		if (($this->input->post('ssCode') != '3H98Ci11i2tE') || ($stagenumber == NULL)) exit('No direct script access allowed');
+		
+		$uid = $this->session->userdata('userID');
+		$this->load->model('RestaurantAdminModel');
+		
+		switch ($stagenumber){
+			case 'stage1':
+			
+				$s1Data = json_decode($this->input->post('data'), true);
+				
+				$db_data = array(
+					'resLoginName'		=> $this->session->userdata('email'),
+					'resName'			=> $s1Data['resName'],
+					'resOpenTime'		=> $s1Data['resOpenTime'],
+					'resCloseTime'		=> $s1Data['resCloseTime'],
+					'resRegionID'		=> 0,
+					'resAddress'		=> $s1Data['resAddress'],
+					'resPhone'			=> $s1Data['resTel'],
+					'resPhoto'			=> $s1Data['resPhoto'],
+					'resLogo'			=> $s1Data['resTM'],
+					'resPriceLimit'		=> $s1Data['lowestPrice'],
+					'resStatus'			=> null,
+					'resDescription'	=> $s1Data['resDescript'],
+					'resNotics'			=> $s1Data['resNotics']
+				);
+				
+				$this->db->where('resID', $uid);
+				$query = $this->db->get('restaurantinfo');
+				
+				if ($query->num_rows == 0) {
+					// Doesn't exist
+					$db_data['resID'] = $uid;
+					$this->db->insert('restaurantinfo', $db_data);
+				} else {
+					// If entry exist
+					$this->db->where('resID', $uid);
+					$this->db->update('restaurantinfo', $db_data);
+				}
+				break;
+			
+			case 'stage2':
+				$s2Data = json_decode($this->input->post('data'), true);
+				$typeIndex = 0;
+				$entryIndex = 0;
+				$db_data1 = NULL;
+				$db_data2 = NULL;
+				$uid = $uid;
+				$blockID = array();
+				
+				
+				foreach ($s2Data as $key1 => $value1){
+					if ($value1['className'] == NULL) continue;
+					$db_data1[$typeIndex] = array(
+						'blkName'		=> $value1['className'],
+						'blkType'		=> 0,
+						'blkClass'		=> 0,
+						'blkOwner'		=> $uid,
+						'blkCol'		=> $value1['blkCol'],
+						'blkPosition'	=> $value1['blkPosition']
+					);
+					
+					
+					foreach ($value1['entry'] as $key2 => $value2){
+						if ($value2['entryName'] == NULL) continue;
+						$db_data2[$entryIndex] = array(
+							'driOwner'	=> $uid,
+							'driName'	=> $value2['entryName'],
+							'driPrice'	=> $value2['entryPrice'],
+							'driType'	=> $typeIndex
+						);
+						$entryIndex++;
+					}
+					$typeIndex++;
+				}
+				
+				if ($db_data1 != NULL) {
+					$this->db->delete('block', array('blkOwner' => $uid, 'blkClass' => 0));
+					foreach ($db_data1 as $key => $value) {
+						$this->db->insert('block', $value);
+						$blockID[$key] =  $this->db->insert_id();
+					}
+				}
+				
+				if ($db_data2 != NULL) {
+					$this->db->delete('drink', array('driOwner' => $uid));
+					foreach ($db_data2 as $key => $value) {
+						$value['driType'] = (int) $blockID[$value['driType']];
+						$this->db->insert('drink', $value);
+					}
+				}
+				break;
+
+			case 'stage3':
+				$s3Data = json_decode($this->input->post('data'), true);
+				$typeIndex = 0;
+				$data1Index = 0;
+				$data2Index = 0;
+				$data3Index = 0;
+				$db_data1 = NULL;
+				$db_data2 = NULL;
+				$db_data2['1'] = NULL;
+				$db_data2['2'] = NULL;
+				$db_data2['3'] = NULL;
+				$blockID = array();
+				
+				foreach ($s3Data as $key1 => $value1) {
+					
+					if ($value1['className'] == NULL) continue;
+					
+					$db_data1[$typeIndex] = array(
+						'blkName'		=> $value1['className'],
+						'blkType'		=> $typeIndex,
+						'blkClass'		=> $value1['formtype'],
+						'blkOwner'		=> $uid
+					);
+					$typeIndex++;
+					
+					switch($value1['formtype']){
+						case 1:
+							foreach ($value1['entry'] as $key2 => $value2) {
+								if ($value2['entryName'] == NULL) continue;
+								$db_data2['1'][$data1Index] = array(
+									'fooName'	=> $value2['entryName'],
+									'fooOwner'	=> $uid,
+									'fooPrice'	=> $value2['entryPrice'],
+									'fooType'	=> $key1
+								);
+								$data1Index++;
+							}
+							break;
+						case 2:
+							foreach ($value1['entry'] as $key2 => $value2) {
+								
+								if ($value2['entryName'] == NULL) continue;
+								$db_data2['2'][$data2Index] = array(
+									'fooName'	=> $value2['entryName'],
+									'fooOwner'	=> $uid,
+									'fooType'	=> $key1
+								);
+								$data2Index++;
+							}
+							break;
+						case 3:
+							foreach ($value1['entry'] as $key2 => $value2) {
+								
+								if (isset($value2['A'])) {
+									if ($value2['A'] == NULL) continue;
+									$db_data2['3'][$data3Index] = array(
+										'fooName'	=> $value2['A'],
+										'fooOwner'	=> $uid,
+										'fooAB'		=> 'A',
+										'fooType'	=> $key1
+									);
+									$data3Index++;
+								}
+								
+								if (isset($value2['B'])) {
+									if ($value2['B'] == NULL) continue;
+									$db_data2['3'][$data3Index] = array(
+										'fooName'	=> $value2['B'],
+										'fooOwner'	=> $uid,
+										'fooAB'		=> 'B',
+										'fooType'	=> $key1
+									);
+									$data3Index++;
+								}
+							}
+							break;
+					}
+					
+				}
+				
+				
+				if ($db_data1 != NULL) {
+					$this->db->where('blkOwner', $this->session->userdata('userID'));
+					$query = $this->db->get('block');
+					if ($query->num_rows() > 0) {
+						$this->db->query("DELETE FROM `menu_block` WHERE `blkClass` != 0 AND `blkOwner` = ".$uid);
+					}
+					foreach ($db_data1 as $key => $value) {
+						$this->db->insert('block', $value);
+						$blockID[$key] =  $this->db->insert_id();
+					}
+				}
+				
+				if ($db_data2['1'] != NULL) {
+					$this->RestaurantAdminModel->deleteEntries('food_type1', 'fooOwner');
+					foreach ($db_data2['1'] as $key => $value) {
+						$value['fooType'] = (int) $blockID[$value['fooType']];
+						$this->db->insert('food_type1', $value);
+					}
+				}
+				if ($db_data2['2'] != NULL) {
+					$this->RestaurantAdminModel->deleteEntries('food_type2', 'fooOwner');
+					foreach ($db_data2['2'] as $key => $value) {
+						$value['fooType'] = (int) $blockID[$value['fooType']];
+						$this->db->insert('food_type2', $value);
+					}
+				}
+				if ($db_data2['3'] != NULL) {
+					$this->RestaurantAdminModel->deleteEntries('food_type3', 'fooOwner');
+					foreach ($db_data2['3'] as $key => $value) {
+						$value['fooType'] = (int) $blockID[$value['fooType']];
+						$this->db->insert('food_type3', $value);
+					}
+				}
+				break;
+			case 'stage4':
+				$s4Data = json_decode($this->input->post('data'), true);
+				foreach ($s4Data as $key1 => $value1){
+					$this->db->query("UPDATE `menu_block` SET `blkCol` = '".$value1['col']."', `blkPosition` = '".$value1['position']."' WHERE `blkID` =".$value1['formid']." LIMIT 1 ;");
+				}
+				break;
+		}
+	
+	}
+
+  /* #tim#
+   * rpc: popup menu for a certain type of food at stage3
+   * @param foo_type: the type of the food to be displayed and modified.
+   * @display: a displayable html form
+   */
+  function resGetFoodInfoHtml($foo_type = -1) {
+    /* XXX: auth control */
+    $this->load->view('restaurantAdmin/foodinfo_popup',
+                      array('foo_type' => $foo_type));
+  }
+
+  /* #tim#
+   * rpc: called when a stage3 popup menu is closed.
+   * @param foo_type: the type of the food to be displayed and modified.
+   * @param (POST) update_data: a json-encoded string containing things
+   * to be updated.
+   * @display: nothing?
+   *
+   * XXX: auth control. we only allow certain user to update itself's
+   * information.
+   */
+  function resUpdateFoodInfoData($foo_type = -1) {
+    $jdata = $this->input->post('update_data');
+    $data = json_decode($jdata);
+    $drink = $data->drink;
+    $soup = $data->soup;
+    $sauce = $data->sauce;
+    $staple = $data->staple;
+    $moar = $data->moar_info;
+
+    /* check existence */
+    $query = $this->db->get_where('menu_food_popupoptions',
+                                  array('fooType' => $foo_type), 1);
+    if (!$query->result()) {
+      /* then we need to create a new row for this type of food */
+      $this->db->insert('menu_food_popupoptions',
+                         array('fooType' => $foo_type));
+    }
+    $this->db->update('menu_food_popupoptions',
+                      array('drink'     => json_encode($drink),
+                            'soup'      => json_encode($soup),
+                            'sauce'     => json_encode($sauce),
+                            'staple'    => json_encode($staple),
+                            'moar_info' => json_encode($moar)),
+                      array('fooType'   => $foo_type));
+  }
+
+  /* rpc: dump menu_food_popupoptions for a given fooType as json
+   */
+  function resGetFoodInfoData($foo_type = -1) {
+    /* XXX: auth control and validity checking */
+    $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
+    $result = $query->result();
+    $this_row = $result[0];
+    $owner = $this_row->blkOwner;
+    $blk_tp = $this_row->blkClass;
+
+    /* get all blockID for this owner 'cause we need to share them */
+    $query = $this->db->get_where('menu_block', array('blkOwner' => $owner));
+    $rows = $query->result();
+    $all_blkids = array();
+		foreach ($rows as $idx => $value) {
+      $all_blkids[] = $value->blkID;
+    }
+
+
+    $all_drinks_query = $this->db->get_where('menu_drink',
+                            array('driOwner' => $owner));
+    $all_drinks_rows = $all_drinks_query->result();
+    $all_drinks = array();
+		foreach ($all_drinks_rows as $key => $value) {
+      $all_drinks[$key] = array(
+        'drinkID'   => $value->driID,
+        'drinkName' => $value->driName
+      );
+    }
+
+    /* for one block(type) */
+    $opt_query = $this->db->get_where('menu_food_popupoptions',
+                                      array('fooType' => $foo_type), 1);
+    $opt_row = $opt_query->result();
+
+    /* init values. note that drinks are stored elsewhere but soups, sauces
+     * and staples are just a dict with key as dish name and value as
+     * selection mark.
+     */
+    $sel_drinks = array();
+    $all_soups = array();
+    $all_sauces = array();
+    $all_staples = array();
+    $all_moars = array();
+
+    if (!$opt_row) {
+      /* the restaurant haven't added any options */
+    } else {
+      $the_row = $opt_row[0];
+      $sel_drinks = json_decode($the_row->drink);
+      if (!$sel_drinks)
+        $sel_drinks = array();
+
+      $all_soups = json_decode($the_row->soup, true);
+      if (!$all_soups)
+        $all_soups = array();
+      $all_sauces = json_decode($the_row->sauce, true);
+      if (!$all_sauces)
+        $all_sauces = array();
+      $all_staples = json_decode($the_row->staple, true);
+      if (!$all_staples)
+        $all_staples = array();
+      $all_moars = json_decode($the_row->moar_info, true);
+      if (!$all_moars)
+        $all_moars = array();
+    }
+
+    /* and add share data */
+		foreach ($all_blkids as $idx => $each_blkid) {
+      $query = $this->db->get_where('menu_food_popupoptions',
+                                    array('fooType' => $each_blkid), 1);
+      $row = $query->result();
+      if ($row) {
+        $row = $row[0];
+        $add_soups = json_decode($row->soup, true);
+        $add_sauces = json_decode($row->sauce, true);
+        $add_staples = json_decode($row->staple, true);
+        $add_moars = json_decode($row->moar_info, true);
+
+        if ($add_soups)
+          foreach ($add_soups as $key => $val) {
+            if (!array_key_exists($key, $all_soups)) {
+              $all_soups[$key] = 0;  /* share this */
+            }
+          }
+
+        if ($add_sauces)
+          foreach ($add_sauces as $key => $val) {
+            if (!array_key_exists($key, $all_sauces)) {
+              $all_sauces[$key] = 0;  /* share this */
+            }
+          }
+
+        if ($add_staples)
+          foreach ($add_staples as $key => $val) {
+            if (!array_key_exists($key, $all_staples)) {
+              $all_staples[$key] = 0;  /* share this */
+            }
+          }
+
+        if ($add_moars)
+          foreach ($add_moars as $key => $val) {
+            if (!array_key_exists($key, $all_moars)) {
+              $all_moars[$key] = 0;  /* share this */
+            }
+          }
+
+      }
+    }
+
+    echo json_encode(array(
+      "all_drinks" => $all_drinks,
+      "sel_drinks" => $sel_drinks,
+      "soup" => $all_soups,
+      "sauce" => $all_sauces,
+      "staple" => $all_staples,
+      "moar_info" => $all_moars,
+    ));
+  }
+
+
+  /* delete the given items. */
+  function resDeleteFoodInfoData($foo_type = -1) {
+    $jdata = $this->input->post('delete_data');
+    $data = json_decode($jdata, true);
+    $soup = $data['soup'];
+    $sauce = $data['sauce'];
+    $staple = $data['staple'];
+    $moar = $data['moar_info'];
+
+    $query = $this->db->get_where('menu_block', array('blkID' => $foo_type), 1);
+    $result = $query->result();
+    $this_row = $result[0];
+    $owner = $this_row->blkOwner;
+
+    $query = $this->db->get_where('menu_block', array('blkOwner' => $owner));
+    $rows = $query->result();
+    $all_blkids = array();
+		foreach ($rows as $idx => $value) {
+      $all_blkids[] = $value->blkID;
+    }
+
+		foreach ($all_blkids as $idx => $each_blkid) {
+      $query = $this->db->get_where('menu_food_popupoptions',
+                                    array('fooType' => $each_blkid), 1);
+      $row = $query->result();
+      if ($row) {
+        $row = $row[0];
+        $soups_here = json_decode($row->soup, true);
+        if ($soups_here) {
+          foreach ($soup as $soup_name => $_) {
+            unset($soups_here[$soup_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('soup' => json_encode($soups_here)),
+                            array('fooType' => $each_blkid));
+        }
+
+        $sauces_here = json_decode($row->sauce, true);
+        if ($sauces_here) {
+          foreach ($sauce as $sauce_name => $_) {
+            unset($sauces_here[$sauce_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('sauce' => json_encode($sauces_here)),
+                            array('fooType' => $each_blkid));
+        }
+
+        $staples_here = json_decode($row->staple, true);
+        if ($staples_here) {
+          foreach ($staple as $staple_name => $_) {
+            unset($staples_here[$staple_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('staple' => json_encode($staples_here)),
+                            array('fooType' => $each_blkid));
+        }
+
+        $moars_here = json_decode($row->moar_info, true);
+        if ($moars_here) {
+          foreach ($moar as $moar_name => $_) {
+            unset($moars_here[$moar_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('moar_info' => json_encode($moars_here)),
+                            array('fooType'   => $each_blkid));
+        }
+      }
+    }
+  }
+}
+
+/* End of file welcome.php */
+/* Location: ./system/application/controllers/welcome.php */

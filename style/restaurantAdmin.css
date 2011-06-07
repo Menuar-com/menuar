@@ -1,0 +1,105 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Menu */
+.mu-res-admin {}
+.mu-res-admin ul{ margin: 0;}
+.mu-admin-submenu li { display: block; width: 215px; height: 50px; background: url("../images/restaurantAdmin/mu_subMenu_bg.png") no-repeat scroll 0 0 transparent; float: left; cursor: pointer;}
+.mu-admin-submenu li span { display: block; float: left;}
+.mu-admin-submenu-title { margin-top: 12px; width: 150px; font-size: 20px; color: #9c9584; width: 120px; text-align: center;}
+
+.mu-res-admin-stages { }
+
+/* Stage 1 */
+#mu-res-admin-stage1 dl { font-size: 16px; color: #888272; width: 430px; display: block; float: left;}
+#mu-res-admin-stage1 dt { display: block; float: left; clear: left; width: 120px; text-align: right; letter-spacing: 2px;}
+#mu-res-admin-stage1 dd { display: block; float: left; width: 200px; margin-left: 10px; margin-bottom: 10px;}
+#mu-res-admin-stage1 dl dl { font-size: 14px; width: auto;}
+#mu-res-admin-stage1 dl dl dt { text-align: left; width: 40px;}
+#mu-res-admin-stage1 dl dl dd { text-align: left; width: auto;}
+#mu-res-admin-stage1 dl dl dd input { width: 144px;}
+
+
+
+/* Stage 2 */
+#mu-res-admin-stage2 { padding-top: 10px;}
+#mu-res-admin-stage2 dl { font-size: 14px; color: #888272; width: 100%; display: block;}
+#mu-res-admin-stage2 dt { display: block; float: left; clear: left; width: 200px; letter-spacing: 2px;}
+#mu-res-admin-stage2 dd { display: block; float: left; width: 80px; margin-left: 10px; margin-bottom: 10px; letter-spacing: 2px;}
+#mu-res-admin-stage2 dd.mu-twoCol-entry { margin-bottom: 0;}
+#mu-res-admin-stage2 .mu-twoCol h4 label {color: #888272; font-size: 14px; font-weight: normal; display: block; padding-bottom: 10px;}
+#mu-res-admin-stage2 .mu-twoCol h4 input { -moz-border-radius: 0; border-radius: 0; background: none repeat scroll 0 0 #F9F9F9; border-style: dashed; border-width: 1px; text-align: center; width: 100%; }
+#mu-res-admin-stage2 .mu-twoCol h4 { margin-bottom: 10px;}
+#mu-res-admin-stage2 .mu-twoCol li { list-style: none; }
+#mu-res-admin-stage2 .mu-twoCol-entry input { width: 100%; }
+#mu-res-admin-stage2 .mu-stage2-add-class { cursor: pointer; text-align: center;}
+#mu-res-admin-stage2 .mu-stage2-add-class span { color: #888272; display: inline; font-size: 18px; font-weight: normal; line-height: 30px; margin-left: 5px; margin-top: 0; }
+#mu-res-admin-stage2 .mu-stage2-form { position: relative;}
+#mu-res-admin-stage2 .mu-stage2-form .mu-deleteForm { position: absolute; width: 25px; height: 26px; top: -10px; right: -10px; background-image: url(../images/mu_close_icon.png); cursor: pointer;}
+
+
+/* Stage 3 */
+#mu-res-admin-stage3 .mu-oneCol dl { font-size: 14px; color: #888272; width: 100%; display: block;}
+#mu-res-admin-stage3 .mu-oneCol h4 label {color: #888272; font-size: 14px; font-weight: normal; display: block; padding-bottom: 10px;}
+#mu-res-admin-stage3 .mu-oneCol h4 input { -moz-border-radius: 0; border-radius: 0; background: none repeat scroll 0 0 #F9F9F9; border-style: dashed; border-width: 1px; text-align: center; width: 100%; }
+#mu-res-admin-stage3 .mu-oneCol h4 { margin-bottom: 10px;}
+#mu-res-admin-stage3 .mu-stage3-form1 dt { display: block; float: left; clear: left; width: 200px; letter-spacing: 2px; clear: left;}
+#mu-res-admin-stage3 .mu-stage3-form1 dd { display: block; float: left; width: 50px; margin-left: 10px; margin-bottom: 10px; letter-spacing: 2px;}
+#mu-res-admin-stage3 .mu-stage3-form1 dd.mu-oneCol-entry { margin-bottom: 0;}
+#mu-res-admin-stage3 .mu-stage3-form2 dt { clear: both;}
+#mu-res-admin-stage3 .mu-stage3-form3 dt { clear: both;}
+#mu-res-admin-stage3 .mu-oneCol-entry input { width: 100%; }
+#mu-res-admin-stage3 .mu-oneCol-entry-orderlist-container { padding-left: 28px;}
+#mu-res-admin-stage3 span.mu-oneCol-entry-orderlist-number { display: block; float: left; margin-left: -30px; margin-top: 5px; width: 24px; text-align: right;}
+#mu-res-admin-stage3 dt input { float: left;}
+#mu-res-admin-stage3 .mu-stage3-form3-class {float: left; padding-left: 30px; width: 100px;}
+#mu-res-admin-stage3 .mu-stage3-add-class { cursor: pointer; text-align: center; margin-bottom: 15px; margin-right: 16px; padding: 10px; }
+#mu-res-admin-stage3 .mu-stage3-add-class span {color: #888272; display: inline; font-size: 18px; font-weight: normal; line-height: 30px; margin-left: 5px; margin-top: 0;}
+
+#mu-res-admin-stage3 .mu-stage3-managecol { float: left; width: 530px; padding: 10px 0; background-color: #fffaec; border: 1px solid #f2dda5; position: relative; top: 0;}
+
+#mu-res-admin-stage3 .mu-stage3-managecol h2 { padding: 0 20px;}
+#mu-res-admin-stage3 .mu-stage3-managecol h2 img { float: left; display: block;}
+#mu-res-admin-stage3 .mu-stage3-managecol h2 span { font-size: 20px; line-height: 25px; color: #9d4f29; font-weight: normal; padding: 10px 20px 0 20px; display: block; float: left; clear: right;}
+
+#mu-res-admin-stage3 .mu-stage3-managecol .mu-stage3-managetools-wrapper { width: 504px; padding: 0 13px 10px;}
+
+#mu-res-admin-stage3 .mu-stage3-managetools { width: 84px; height: 84px; float: left; margin: 0px; background: url("../images/restaurantAdmin/mu_stage3_tools_bg.png") no-repeat scroll 0 0 transparent; overflow: hidden; cursor: pointer;}
+#mu-res-admin-stage3 .mu-stage3-managetools:hover, #mu-res-admin-stage3 .mu-stage3-managetools.active { background-position: 0 -84px;}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool1 {}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool2 { margin-left: -84px;}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool3 { margin-left: -168px;}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool4 { margin-left: -252px;}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool5 { margin-left: -336px;}
+#mu-res-admin-stage3 .mu-stage3-managetools .mu-stage3-tool6 { margin-left: -420px;}
+#mu-res-admin-stage3 .mu-stage3-managetools img { margin-top: 0px;}
+#mu-res-admin-stage3 .mu-stage3-managetools:hover img { margin-top: -84px;}
+
+#mu-res-admin-stage3 .mu-stage3-managetools-block { padding: 10px 20px;}
+#mu-res-admin-stage3 .mu-stage3-managetools-block h3 {font-size: 16px; line-height: 20px; color: #9d4f29; font-weight: normal;}
+
+#mu-res-admin-stage3 .mu-stage3-form-header { height: 40px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:1px solid #ffd665; background-color: #fff7df; text-align: center; margin-bottom: 10px;}
+#mu-res-admin-stage3 .mu-stage3-form-header span { line-height: 40px; color: #9d4f29; font-size: 20px;}
+#mu-res-admin-stage3 .mu-stage3-form-header-tool1 { background: url('../images/restaurantAdmin/mu_stage3_tools_header_icon.png') no-repeat scroll 20px 0 transparent;}
+#mu-res-admin-stage3 .mu-stage3-form-header-tool2 { background: url('../images/restaurantAdmin/mu_stage3_tools_header_icon.png') no-repeat scroll 20px -40px transparent;}
+#mu-res-admin-stage3 .mu-stage3-form-header-tool3 { background: url('../images/restaurantAdmin/mu_stage3_tools_header_icon.png') no-repeat scroll 20px -80px transparent;}
+
+
+/* Stage 4 */
+
+.mu-class-block { background-color: #FFFAEC; border: 1px solid #F2DDA5; padding: 5px; margin-bottom: 10px;}
+.mu-class-block .mu-class-name { height: 40px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:1px solid #ffd665; background-color: #fff7df; text-align: center; margin-bottom: 10px; position: relative;}
+.mu-class-block .mu-class-name span { line-height: 40px; color: #9d4f29; font-size: 20px; }
+.mu-class-block .mu-class-name .mu-class-icon { position: absolute; top: 1px; left: 20px; background: url('../images/mu_mealset_icon.png') no-repeat scroll 0 0 transparent; width: 40px; height: 40px;}
+.mu-class-block .mu-entry-wrapper { color: #888272; font-size: 16px; padding: 0 12px; line-height: 24px;}
+.mu-class-block .mu-entry-wrapper .mu-drink-entry-row:hover, .mu-class-block .mu-entry-wrapper .mu-type1-entry-row:hover  { background-color: #FFF7DF;}
+.mu-class-block .mu-entry-wrapper .mu-entry-price { float: right;}
+#mu-res-admin-stage4 .mu-twoCol-col1, #mu-res-admin-stage4 .mu-twoCol-col2 { padding-bottom: 200px; border-bottom: 1px dashed #ffd665;}
+
+
+/* Others */
+
+#mu-res-admin-stage-container { width: 860px; height: 600px; position: relative; overflow: hidden;}
+#mu-res-admin-stage-container #mu-res-admin-stage-items { width: 3440px; position: absolute; clear: both;}
+#mu-res-admin-stage-container #mu-res-admin-stage-items .mu-res-admin-stages { width: 860px !important; float: left;}
+#s1-resPhoto-upload img { width: 150px;}
