@@ -630,6 +630,8 @@ class RestaurantAdmin extends Controller {
     $data = json_decode($jdata);
     $drink = $data->drink;
     $soup = $data->soup;
+    $sauce = $data->sauce;
+    $staple = $data->staple;
 
     /* check existence */
     $query = $this->db->get_where('menu_food_popupoptions',
@@ -640,8 +642,10 @@ class RestaurantAdmin extends Controller {
                          array('fooType' => $foo_type));
     }
     $this->db->update('menu_food_popupoptions',
-                      array('drink' => json_encode($drink),
-                            'soup' => json_encode($soup)),
+                      array('drink'   => json_encode($drink),
+                            'soup'    => json_encode($soup),
+                            'sauce'   => json_encode($sauce),
+                            'staple'  => json_encode($staple)),
                       array('fooType' => $foo_type));
   }
 
@@ -710,7 +714,6 @@ class RestaurantAdmin extends Controller {
 
     /* and add share data */
 		foreach ($all_blkids as $idx => $each_blkid) {
-      /* echo "loop for $each_blkid\n"; */
       $query = $this->db->get_where('menu_food_popupoptions',
                                     array('fooType' => $each_blkid), 1);
       $row = $query->result();
@@ -720,23 +723,36 @@ class RestaurantAdmin extends Controller {
         $add_sauces = json_decode($row->sauce, true);
         $add_staples = json_decode($row->staple, true);
 
-        if ($add_soups) {
+        if ($add_soups)
           foreach ($add_soups as $key => $val) {
             if (!array_key_exists($key, $all_soups)) {
               $all_soups[$key] = 0;  /* share this */
             }
           }
-        }
-        echo "\n\n";
+
+        if ($add_sauces)
+          foreach ($add_sauces as $key => $val) {
+            if (!array_key_exists($key, $all_sauces)) {
+              $all_sauces[$key] = 0;  /* share this */
+            }
+          }
+
+        if ($add_staples)
+          foreach ($add_staples as $key => $val) {
+            if (!array_key_exists($key, $all_staples)) {
+              $all_staples[$key] = 0;  /* share this */
+            }
+          }
+
       }
     }
 
     echo json_encode(array(
       "all_drinks" => $all_drinks,
       "sel_drinks" => $sel_drinks,
-      "soups" => $all_soups,
-      "sauces" => $all_sauces,
-      "staples" => $all_staples,
+      "soup" => $all_soups,
+      "sauce" => $all_sauces,
+      "staple" => $all_staples,
     ));
   }
 
@@ -772,6 +788,26 @@ class RestaurantAdmin extends Controller {
           }
           $this->db->update('menu_food_popupoptions',
                             array('soup' => json_encode($soups_here)),
+                            array('fooType' => $each_blkid));
+        }
+
+        $sauces_here = json_decode($row->sauce, true);
+        if ($sauces_here) {
+          foreach ($sauce as $sauce_name => $_) {
+            unset($sauces_here[$sauce_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('sauce' => json_encode($sauces_here)),
+                            array('fooType' => $each_blkid));
+        }
+
+        $staples_here = json_decode($row->staple, true);
+        if ($staples_here) {
+          foreach ($staple as $staple_name => $_) {
+            unset($staples_here[$staple_name]);
+          }
+          $this->db->update('menu_food_popupoptions',
+                            array('staple' => json_encode($staples_here)),
                             array('fooType' => $each_blkid));
         }
       }
