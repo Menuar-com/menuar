@@ -752,51 +752,52 @@ $(document).ready(function(){
 
 
 /* restaurant management tool functions */
-(function () {
-  /* namespace RMan */
-  var RMan = window.RMan = window.RMan || {};
 
-  RMan._focus_row = -1;
-  RMan.set_focus_row = function (row_num) {
-    RMan._focus_row = row_num;
-    //console.log('focusing on', RMan._focus_row);
-  };
+(function () { /* namespace RMan */
+	var RMan = window.RMan = window.RMan || {};
 
-  RMan._foodtype_mapper = {};
-  RMan.update_ft_mapper = function (k, v) {
-    RMan._foodtype_mapper[k] = v;
-    //console.log('updating ft mapper', k, v);
-  };
+	RMan._focus_row = -1;
+	RMan.set_focus_row = function (row_num) {
+		RMan._focus_row = row_num;
+		//console.log('focusing on', RMan._focus_row);
+	};
 
-  /* create a fancy box, grab data from server, display then and let
+	RMan._foodtype_mapper = {};
+	RMan.update_ft_mapper = function (k, v) {
+		RMan._foodtype_mapper[k] = v;
+		//console.log('updating ft mapper', k, v);
+	};
+
+/* create a fancy box, grab data from server, display then and let
    * the user change those datum
    */
-  RMan.on_popup_clicked = function () {
-    var curr_row = RMan._focus_row;
-    console.log('popup is clicked');
-    $.fancybox({
-      href: 'online/restaurantAdmin/resGetFoodInfoHtml/' +
-            String(RMan._foodtype_mapper[curr_row]),
-      onClosed: function (e) {
-        /* this function is shared from the popup menu. */
-        var call = RMan.upload_popup_data;
-        if (call) call();
-      }
-    });
-  };
-  
-  /* register event on one button */
-  var _register_event = function (btn_no, func) {
-    $('#mu-stage3-tool' + String(btn_no)).click(function (evt) {
-      func();
-    });
-  };
+	RMan.on_popup_clicked = function () {
+		var curr_row = RMan._focus_row;
+		//console.log('popup is clicked');
+		$.fancybox({
+			href: 'online/restaurantAdmin/resGetFoodInfoHtml/' + String(RMan._foodtype_mapper[curr_row]),
+			onClosed: function (e) { /* this function is shared from the popup menu. */
+				var call = RMan.upload_popup_data;
+				if (call) call();
+			},
+			centerOnScroll: true,
+			overlayShow: false,
+			transitionIn: 'elastic',
+			scrolling: 'no',
+			height: 480
+		});
+	};
 
-  /* register events on buttons when dom is ready */
-  $(document).ready(function () {
-    _register_event('popup', RMan.on_popup_clicked);
-  });
+	/* register event on one button */
+	var _register_event = function (btn_no, func) {
+			$('#mu-stage3-tool' + String(btn_no)).click(function (evt) {
+				func();
+			});
+		};
+
+	/* register events on buttons when dom is ready */
+	$(document).ready(function () {
+		_register_event('popup', RMan.on_popup_clicked);
+	});
 
 })();
-
-

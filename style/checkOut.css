@@ -33,18 +33,30 @@
 .mu_foodList .mu_fl_c4 { width: 98px;}
 .mu_foodList .mu_fl_c5 { width: 50px;}
 
+.mu_orderBar { clear: both;}
+.mu_orderBar button { float: right;}
 .mu_loginBar { clear: both;}
 .mu_loginWFB { float: left;}
 .mu_loginBtn { float: right;}
 
 
-/* */
+/* Already logged in */
 #mu_CO_MB {}
+#mu_CO_MB h3 {font-size: 24px;}
+#mu_CO_MB h4 { text-align: center; font-size: 20px; line-height: 25px; margin: 10px 0; color: #fe2525; }
 
-/* */
-#mu_CO_NM {}
 
-/* */
+/* Old member */
 #mu_CO_NM {}
+#mu_CO_NM h3 {font-size: 24px;}
+
+/* New Member */
+#mu_CO_NM {}
+#mu_CO_NM h3 {font-size: 24px;}
 #mu_CO_NM .mu_FBconnect { text-align: center;}
 #mu_CO_NM .mu_or { text-align: center; color: #9d4f29; font-size: 24px; padding: 25px 0;}
+
+
+/* common */
+#mu_CO_right .mu_basicBlk p { clear: both; color: #0c00ff; font-size: 18px; text-align: right;}
+#mu_CO_right .mu_basicBlk button { font-size: 20px;}

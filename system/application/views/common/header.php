@@ -25,7 +25,7 @@
 	<div class="clearer"></div>
 	<div id="mu-header">
 		<div id="mu-site-logo">
-			<h1><a href="<? echo base_url() ?>"><img src="<? echo base_url() ?>images/mu-site-logo.png" alt="Menu Ar - 咩料呀？！" /></a></h1>
+			<h1><a href="<? echo base_url() ?>"><img src="<? echo base_url() ?>images/of_logo.png" alt="Menu Ar - 咩料呀？！" /></a></h1>
 		</div>
 		<div id="mu-login-bar">
 			<input name="mu-login-email" />

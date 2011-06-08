@@ -1,5 +1,4 @@
 <script>
-var restInfoJSON = '{"email"："cksam@ust.hk","resName"："\u91d1\u9cf3\u8336\u9910\u5ef3","resOpenTime"："00：00：00","resCloseTime"："19：00：00","resAddress"："\u9999\u6e2f\u7063\u4ed4\u6625\u5712\u885741\u865f","resTel"："25720526","resPhoto"："upload\/img_resPhoto\/2.jpg","resTM"："upload\/img_reslogo\/2.jpg","lowestPrice"："0","resDescript"："\u91d1\u9cf3\u8336\u9910\u5ef3\u6b63","resNotics"："\u6210\u529f\u6210\u70ba\u7b2c\u4e00\u9593\u6e2c\u8a66\u8336\u9910\u5ef3"}';
 
 $(document).ready(function(){
 	$('.mu_rest_ranking').each(function(){

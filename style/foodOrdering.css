@@ -26,6 +26,19 @@
 .mu_FO_s1_tabs.mu_active { display: block; }
 #mu_FO_s1_tab1_wrapper { width: 660px; margin: 20px auto; }
 
+/* tab2 */
+#mu_posSearchWrapper { padding-top: 50px; margin: 0 auto; width: 640px;}
+#mu_posSearchWrapper form { width: 400px; display: block; margin: 0 auto;}
+#mu_posSearchWrapper form label { width: 250px; display: block; float: left; color: #F60; font-size: 18px; margin: 0; line-height: 25px;}
+#mu_posSearchWrapper form input { width: 250px; float: left; }
+#mu_posSearchWrapper form button { font-size: 18px; line-height: 25px; float: left; margin-left: 5px; margin-top: -10px;}
+#mu_posSearchWrapper #mu_hotPlace { margin-top: 20px;}
+#mu_posSearchWrapper #mu_hotPlace .mu_col1 { float: left; width: 160px; color: #9B501F;}
+#mu_posSearchWrapper #mu_hotPlace .mu_col2 { float: left; width: 160px; color: #9B501F;}
+#mu_posSearchWrapper #mu_hotPlace .mu_col3 { float: left; width: 160px; color: #9B501F;}
+#mu_posSearchWrapper #mu_hotPlace .mu_col4 { float: left; width: 160px; color: #9B501F;}
+#mu_posSearchWrapper #mu_hotPlace h6 { font-size: 18px; line-height: 25px; text-decoration: underline; }
+#mu_posSearchWrapper #mu_hotPlace li { font-size: 16px; line-height: 20px;}
 /* tab4 */
 #mu_FO_s1_tab4 img { margin: 20px auto;}
 
@@ -114,9 +127,8 @@
 #mu_popup_moreOption .mu_CD_opts .mu_CD_itemPrice { float: right; margin-right: 20px; line-height: 20px; }
 #mu_popup_moreOption .mu_CD_opts textarea { width: 720px;}
 #mu_popup_moreOption .mu_CD_go { text-align: right; margin: 20px 15px 20px 0;}
-#mu_popup_moreOption .mu_CD_go button { font-size: 24px; }
-#mu_popup_moreOption .mu_CD_go .mu_cancel {}
-#mu_popup_moreOption .mu_CD_go .mu_order {}
+#mu_popup_moreOption .mu_CD_go .mu_cancel { font-size: 18px; vertical-align: bottom;}
+#mu_popup_moreOption .mu_CD_go .mu_order { font-size: 24px; vertical-align: bottom;}
 
 /* Popup Menu - Cart Details */
 .mu_iosIcon1, .mu_iosIcon2, .mu_iosIcon3 { background: url(../images/foodOrdering/ios_ui.png) no-repeat scroll 0 0; width: 30px; height: 30px;}

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#mu_FO_s1_wrapper').height($('#mu_FO_s1_wrapper #mu_FO_s1_tab1').height() + 2);
 });
 </script>
+
 <div id="mu_FO_s1_wrapper">
 	<div id="mu_FO_s1_left">
 		<div class="mu_FO_s1_navs mu_active mu_first" id="mu_FO_s1_nav1" targetTab="1">
@@ -24,10 +25,52 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab2" tab="2">
-		<form id="mu_posSearch" action="posSearch" method="post">
-			<input type="text" value="" maxlength="10" name="posSearch_input" title="你係邊到～？" />
-			<input type="image" src="#" name="home_guest_find" id="posSearch_submit" />
-		</form>
+		<div id="mu_posSearchWrapper">
+			<form id="mu_posSearch" action="posSearch" method="post">
+				<label for="posSearch_input"><span style="font-size: 24px;">我</span>而家係</label>
+				<input type="text" value="" maxlength="10" name="posSearch_input" id="posSearch_input" title="你係邊到～？" />
+				<button id="mu_posSearch_next">叫外賣</button>
+				<script language="javascript">
+					$('#mu_posSearch_next').button();
+				</script>
+			</form>
+			<div class="clearer"></div>
+			<div id="mu_hotPlace">
+				<div class="mu_col1">
+					<h6>灣仔</h6>
+					<ul>
+						<li>修頓</li>
+						<li>灣仔道</li>
+						<li>駱克道</li>
+					</ul>
+				</div>
+				<div class="mu_col2">
+					<h6>銅鑼灣</h6>
+					<ul>
+						<li>修頓</li>
+						<li>灣仔道</li>
+						<li>駱克道</li>
+					</ul>
+				</div>
+				<div class="mu_col3">
+					<h6>...</h6>
+					<ul>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+					</ul>
+				</div>
+				<div class="mu_col4">
+					<h6>...</h6>
+					<ul>
+						<li>...</li>
+						<li>...</li>
+						<li>...</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="clearer"></div>
 	</div>
 	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab3" tab="3"></div>
 	<div class="mu_FO_s1_tabs" id="mu_FO_s1_tab4" tab="4"> <img src="images/mu_MTR.png" width="700" height="563" border="0" usemap="#mu_FO_MTR" />

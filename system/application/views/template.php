@@ -37,18 +37,21 @@
 <body>
 <div id="mu-page-wrapper">
 	<div id="mu-promotional-message" style=" display: none;">
-		<p>獲得即時優惠資訊</p>
+		<p>即時注冊成為會員：</p>
 		<input name="mu-prom-email" />
+		<!--
 		<div id="mu-prom-btn-wrapper">
 			<div class="mu-btn-l mu-btn-blue"></div>
 			<div class="mu-btn-m mu-btn-blue">訂閱</div>
 			<div class="mu-btn-r mu-btn-blue"></div>
 		</div>
+		
+		-->
 	</div>
 	<div class="clearer"></div>
 	<div id="mu-header">
 		<div id="mu-site-logo">
-			<h1><a href=""><img src="images/mu-site-logo.png" alt="Menuar - 香港線上訂餐平台" /></a></h1>
+			<h1><a href=""><img src="images/of_logo.png" alt="OrderFood - 香港線上訂餐平台" /></a></h1>
 		</div>
 		<?= $loginStatus ?>
 		<div id="mu-social-network-bar"><span>追踪我們：</span>

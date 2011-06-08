@@ -84,6 +84,44 @@
 #mu-res-admin-stage3 .mu-stage3-form-header-tool2 { background: url('../images/restaurantAdmin/mu_stage3_tools_header_icon.png') no-repeat scroll 20px -40px transparent;}
 #mu-res-admin-stage3 .mu-stage3-form-header-tool3 { background: url('../images/restaurantAdmin/mu_stage3_tools_header_icon.png') no-repeat scroll 20px -80px transparent;}
 
+/* Popup menu */
+.mu_pop_title { color: #9D4F29; font-size: 24px; line-height: 30px; margin-bottom: 10px;}
+#mu-res-admin-popup-wrapper { width: 760px;}
+#mu-res-admin-popup-wrapper h6 { color: #B12323; font-size: 16px; line-height: 30px; font-weight: normal; padding-left: 30px; margin: 5px 0; background: url(../images/foodOrdering/ios_ui.png) no-repeat scroll 0 0; overflow: hidden;}
+#mu-res-admin-popup-wrapper .mu_itemsBlk { display: block; float: left; width: 180px;}
+#mu-res-admin-popup-wrapper .mu_itemsBlk_tickbox { background-image: url('../images/foodOrdering/check_box.png'); width: 20px; height: 20px; float: left; background-position: -20px 0; cursor: pointer; margin-left: 5px; }
+#mu-res-admin-popup-wrapper .mu_itemsBlk a {font-size: 14px; color: #9b501f; text-decoration: none; display: block; float: left; margin-left: 5px;}
+
+/*  Popup menu Drink Option */
+#mu-res-admin-popup-wrapper .mu_CD_title { color: #9d4f29; font-size: 24px; line-height: 30px;}
+#mu-res-admin-popup-wrapper .mu_CD_main { max-height: 480px; width: 740px; overflow-y: hidden; overflow-x: hidden; }
+#mu-res-admin-popup-wrapper .mu_col1 { float: left; width: 310px;}
+#mu-res-admin-popup-wrapper .mu_col2 { float: left; width: 310px; margin-left: 20px;}
+#mu-res-admin-popup-wrapper .mu_foodBlk {background-color: #FFFAEC; border: 1px solid #F2DDA5; margin-bottom: 10px; padding: 5px;}
+#mu-res-admin-popup-wrapper .mu_foodBlkName { height: 40px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:1px solid #ffd665; background-color: #fff7df; text-align: center; margin-bottom: 10px; position: relative;}
+#mu-res-admin-popup-wrapper .mu_foodBlkName span { line-height: 40px; color: #9d4f29; font-size: 20px; }
+#mu-res-admin-popup-wrapper .mu_foodBlkName .mu-class-icon { position: absolute; top: 1px; left: 20px; background: url('../images/mu_mealset_icon.png') no-repeat scroll 0 0 transparent; width: 40px; height: 40px;}
+#mu-res-admin-popup-wrapper .mu_entry_wrapper { color: #888272; font-size: 16px; padding: 0 12px; line-height: 24px;}
+#mu-res-admin-popup-wrapper .mu_entry_wrapper .mu-drink-entry-row:hover, #mu-res-admin-popup-wrapper .mu_entry_wrapper .mu-type1-entry-row:hover  { background-color: #FFF7DF;}
+#mu-res-admin-popup-wrapper .mu_entry_wrapper .mu-entry-price { float: right;}
+#mu-res-admin-popup-wrapper .mu_CD_title span.mu_CD_chosen { color: #ff6600;}
+#mu-res-admin-popup-wrapper .mu_CD_subTitle { color: #5f4e22; font-size: 18px; line-height: 25px; padding-left: 10px; }
+#mu-res-admin-popup-wrapper h6 { padding-left: 30px; font-size: 16px; color: #b12323; background: url(../images/foodOrdering/ios_ui.png) no-repeat scroll 0 0; line-height: 26px; height: 30px;}
+#mu-res-admin-popup-wrapper h7 { font-size: 14px; color: #9d4f29; text-decoration: underline; text-align: center; display: block; margin-bottom: 10px; }
+#mu-res-admin-popup-wrapper .mu_col1, #mu-res-admin-popup-wrapper .mu_col2 { width: 370px; float: left;}
+#mu-res-admin-popup-wrapper .mu_CD_items { color: #b12323; font-size: 14px; width: 185px; float: left; cursor: pointer; }
+#mu-res-admin-popup-wrapper .mu_CD_clickBox { clear: both; float: left; background-image: url('../images/foodOrdering/check_box.png'); width: 20px; height: 20px; background-position: -20px 0; }
+#mu-res-admin-popup-wrapper .mu_CD_items.mu_active .mu_CD_clickBox { background-position: 0; }
+#mu-res-admin-popup-wrapper .mu_CD_itemName { float: left; line-height: 20px; margin-left: 3px; max-width: 100px; }
+#mu-res-admin-popup-wrapper .mu_CD_itemPrice { float: right; margin-right: 20px; line-height: 20px; }
+#mu-res-admin-popup-wrapper textarea { width: 720px;}
+#mu-res-admin-popup-wrapper .mu_CD_go { text-align: right; margin: 20px 15px 20px 0;}
+#mu-res-admin-popup-wrapper .mu_CD_go button { font-size: 24px; }
+#mu-res-admin-popup-wrapper .mu_CD_go .mu_cancel {}
+#mu-res-admin-popup-wrapper .mu_CD_go .mu_order {}
+
+/* button */
+#mu-res-admin-popup-wrapper button.mu_iconBtn { display: block; width: 30px; height: 25px;}
 
 /* Stage 4 */
 

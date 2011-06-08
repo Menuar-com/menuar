@@ -39,7 +39,7 @@ $active_record = TRUE;
 
 if(strpos($_SERVER['HTTP_HOST'],"localhost") !== false || strpos($_SERVER['HTTP_HOST'],"8888") !== false || strpos($_SERVER['HTTP_HOST'], '143.89') !== false) {
 	$db['default']['username'] = "root";
-	$db['default']['password'] = "mypass";
+	$db['default']['password'] = "root";
 	$db['default']['database'] = "menuar";
 } elseif (strpos($_SERVER['HTTP_HOST'],"menuar")) {
 	$db['default']['username'] = "menuarcomf_main";
