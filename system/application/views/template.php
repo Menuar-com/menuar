@@ -9,8 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href='style/base.css' type="text/css" />
+<link rel="stylesheet" href='style/ui-lightness/jquery-ui-1.8.9.custom.css' type="text/css" />
 <link rel="stylesheet" href='style/shadowbox.css' type="text/css" />
 <link rel="stylesheet" href='plugin/fancybox/jquery.fancybox-1.3.4.css' type="text/css" />
+
 <?= $_styles ?>
 
 <!--[if lt IE 8]>
@@ -38,7 +40,18 @@
 <div id="mu-page-wrapper">
 	<div id="mu-promotional-message" style=" display: none;">
 		<p>即時注冊成為會員：</p>
-		<input name="mu-prom-email" />
+		<label for="mu_hb_username"></label>
+		<input name="mu_hb_username" id="mu_hb_username" />
+		
+		<label for="mu_hb_password"></label>
+		<input name="mu_hb_password" id="mu_hb_password" />
+		
+		<button id="mu_hb_signup">注冊</button>
+		<script language="javascript">
+			$(document).ready(function(){
+				$('#mu_hb_signup').button();
+			})
+		</script>
 		<!--
 		<div id="mu-prom-btn-wrapper">
 			<div class="mu-btn-l mu-btn-blue"></div>
@@ -53,21 +66,20 @@
 		<div id="mu-site-logo">
 			<h1><a href=""><img src="images/of_logo.png" alt="OrderFood - 香港線上訂餐平台" /></a></h1>
 		</div>
-		<?= $loginStatus ?>
-		<div id="mu-social-network-bar"><span>追踪我們：</span>
-			<div class="mu-sns-32x32-icon mu-sns-fb"><img src="images/sns_icon.png" alt="Facebook" usemap="#mu-sns-link" /></div>
-			<div class="mu-sns-32x32-icon mu-sns-tt"><img src="images/sns_icon.png" alt="Twitter" usemap="#mu-sns-link" /></div>
-			<div class="mu-sns-32x32-icon mu-sns-wb"><img src="images/sns_icon.png" alt="WeiBo" usemap="#mu-sns-link" /></div>
-			<div class="mu-sns-32x32-icon mu-sns-rs"><img src="images/sns_icon.png" alt="RSS" usemap="#mu-sns-link" /></div>
-			<map name="mu-sns-link" id="mu-sns-link">
-				<area shape="rect" coords="0,0,32,32" href="#1" />
-				<area shape="rect" coords="32,0,64,32" href="#2" />
-				<area shape="rect" coords="64,0,94,32" href="#3" />
-				<area shape="rect" coords="94,0,128,32" href="#4" />
-			</map>
+		<div id="fo_loginbar_wrapper">
+			<div class="fo_loginbar_l"></div>
+			<div class="fo_loginbar_m">
+				<div class="fo_notLogged">
+					<span><a class="fo_signupBtn" href="#fo_popup_signupBox">新用戶?</a> | <a class="fo_loginBtn" href="#fo_popup_loginBox">登入</a> </span>
+					<!-- Connect to Facebook -->
+				</div>
+				<div class="fo_logged fb_hidden">
+					<span>您好 ! iamsam... | <a href="">登出</a></span>
+					<!-- Facebook Logged icon -->
+				</div>
+			</div>
+			<div class="fo_loginbar_r"></div>
 		</div>
-		<?= $freeReg ?>
-		<!-- -->
 		<div class="clearer"></div>
 	</div>
 	<div id="mu-body-wrapper-t"></div>
@@ -81,12 +93,94 @@
 		</div>
 		<div id="mu-main-body-b"></div>
 		<div id="mu-copyright">
-			<p>MenuAr.com為香港網上訂餐平台，提供餐廳資料、飲食資訊、及餐廳優惠。<br />
-				Copyright © 2000-2011 Menuar Group Inc. 版權所有 不得轉載</p>
+			<p class="mu_copyright_text">OrderFood.com.hk 為你提供線上訂餐服務、餐廳資料、飲食資訊、及餐廳優惠。<br />
+				Copyright © 2000-2011 OrderFood Inc. 版權所有 不得轉載</p>
+			<div id="mu-social-network-bar">
+				<span>追踪我們：</span>
+				<div class="mu-sns-32x32-icon mu-sns-fb"><img src="images/sns_icon.png" alt="Facebook" usemap="#mu-sns-link" /></div>
+				<div class="mu-sns-32x32-icon mu-sns-tt"><img src="images/sns_icon.png" alt="Twitter" usemap="#mu-sns-link" /></div>
+				<div class="mu-sns-32x32-icon mu-sns-wb"><img src="images/sns_icon.png" alt="WeiBo" usemap="#mu-sns-link" /></div>
+				<div class="mu-sns-32x32-icon mu-sns-rs"><img src="images/sns_icon.png" alt="RSS" usemap="#mu-sns-link" /></div>
+				<map name="mu-sns-link" id="mu-sns-link">
+					<area shape="rect" coords="0,0,32,32" href="#1" />
+					<area shape="rect" coords="32,0,64,32" href="#2" />
+					<area shape="rect" coords="64,0,94,32" href="#3" />
+					<area shape="rect" coords="94,0,128,32" href="#4" />
+				</map>
+			</div>
+			<div class="clearer"></div>
 		</div>
 	</div>
 	<div id="mu-body-wrapper-b"></div>
 </div>
 <div id="site-slide-bar"></div>
+
+<div style="display: none;">
+	<div id="fo_popup_loginBox">
+		<div class="fo_left">
+			<h5>Facebook 用戶登入</h5>
+			<p>使用你的Facebook 帳號登入，便可……..與朋友分享！</p>
+			<!-- Add Facebook connect here -->
+		</div>
+		<div class="fo_right">
+			<h5><img src="images/fo_small_logo.png" />會員登入</h5>
+			<form>
+				<label class="fo_textboxLB">登入電郵：</label>
+				<input type="text" value="" maxlength="255" class="required email error" name="email" id="email">
+				<label class="fo_textboxLB">密碼：</label>
+				<input type="password" value="" maxlength="255" class="required password" name="password" id="password">
+				<div class="fo_checkboxWrapper">
+					<input type="checkbox" name="fo_rememberMe" id="fo_rememberMe" value="1" />
+					<label class="fo_checkboxLB" for="fo_rememberMe">記住我既登入資料～</label>
+				</div>
+				<button class="fo_login_btn">登入</button>
+			</form>
+			<div class="clearer"></div>
+		</div>
+	</div>
+	<div id="fo_popup_signupBox">
+		<h5>新用戶登記</h5>
+		<form class="form">
+			<ul>
+				<li class="mu-form-crossline" id="mu-li-email">
+					<label for="email" class="description">電郵地址：</label>
+					<div class="mu-form-input">
+						<input type="text" value="" maxlength="255" class="required email error" name="email" id="email"><label for="email" generated="true" class="error">請輸入正確的電郵地址。</label>
+					</div>
+					<div class="clearer"></div>
+				</li>
+				<li class="left" id="mu-li-password">
+					<label for="password" class="description">密碼：</label>
+					<div class="form_input">
+						<input type="password" value="" maxlength="255" class="required password" name="password" id="password">
+					</div>
+					<div class="clearer"></div>
+				</li>
+				<li class="right" id="mu-li-re-password">重複輸入密碼：
+					<div class="form_input">
+						<input type="password" value="" equalto="#password" maxlength="255" class="required password" name="re_password" id="re_password">
+					</div>
+					<div class="clearer"></div>
+				</li>
+				<li class="form_wholeline" id="mu-li-promo">
+					<label>
+						<input type="checkbox" value="1" name="promo">
+						我不想定期在電子信箱中收到OrderFood.com.hk的精選優惠資訊。
+					</label>
+					<label>
+						<input type="checkbox" value="1" name="TandC">
+						我同意且已閱讀OrderFood.com.hk的使用條款。
+					</label>
+				</li>
+				<li class="of_signup_submit">
+					<input type="hidden" value="3ephusP8" name="ssCode">
+					<button class="of_signup_submitBtn">遞交</button>
+					<button class="of_signup_cancelBtn">取消</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+
 </body>
 </html>

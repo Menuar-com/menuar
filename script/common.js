@@ -1,4 +1,5 @@
 var DEBUG_MODE = false;
+var FO_LOGGED = false;
 
 if (getUrlParameter('debug') != null) DEBUG_MODE = true;
 
@@ -54,3 +55,52 @@ $.fn.hint = function (blurClass) {
 };
 
 })(jQuery);
+
+
+
+
+$(document).ready(function(){
+	// --------------- Handle the login function --------------- 
+	// FO_LOGGED;
+	$('#fo_loginbar_wrapper .fo_loginBtn').fancybox({
+		centerOnScroll: true,
+		overlayShow: false,
+		transitionIn: 'elastic',
+		scrolling: 'no',
+		height: 480
+	});
+	$('#fo_loginbar_wrapper .fo_signupBtn').fancybox({
+		centerOnScroll: true,
+		overlayShow: false,
+		transitionIn: 'elastic',
+		scrolling: 'no',
+		height: 480
+	});
+	$('#fo_popup_loginBox button.fo_login_btn').button();
+	$('#fo_popup_signupBox button.of_signup_submitBtn').button();
+	$('#fo_popup_signupBox button.of_signup_cancelBtn').button();
+	
+	$('#fo_popup_loginBox button.fo_login_btn').click(function(){
+		var serverResponse = $.ajax({
+			url: "online/welcome/login",
+			global: false,
+			type: "POST",
+			data: ({email : $('#mu-login-email').val(), password : $('#mu-login-password').val()}),
+			dataType: "html",
+			async:false
+		}).responseText;
+		if (serverResponse != "") {
+			//$('#mu-login-bar').replaceWith(bodyContent);
+			//$('#mu-free-signup').fadeOut();
+		} else {
+			//$.fancybox({'content' : "輸入資料錯誤，請重新輸入。"});
+			//alert('Wrong info')
+		}
+
+	});
+	$('#fo_popup_signupBox button.of_signup_submitBtn').button();	
+	
+	
+	
+	
+});

@@ -67,6 +67,7 @@ a.audio { background: url(./../elements/icons/globaliconaudio12x12.gif) 0 0.4em 
 /** Form Style **/
 input {-moz-border-radius-bottomright:7px; -moz-border-radius-topleft:7px;border-top-left-radius: 7px;
 border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); background-position:100% 0; background-repeat:no-repeat; border:1px solid #CCCCCC; color:#666666; display:block; font-size:18px; margin-bottom:5px; padding:3px 0 3px 3px; width:195px;}
+input[type="checkbox"] { padding: 0; margin: 0; width: auto; }
 .form ul { margin: 0; padding: 0;}
 .form ul li { display: block; padding: 5px 0; margin: 0 0 10px; width: 200px; }
 .form label { display: block; padding-bottom: 2px; }
@@ -121,24 +122,28 @@ border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); 
 
 
 /** Section B **/
-#mu-header { width: 100%; height: 110px; position: relative; overflow: visible;}
-#mu-header #mu-site-logo { display: block; position: absolute; top: 20px; left: 20px;}
+#mu-header { width: 100%; height: 90px; position: relative; overflow: visible;}
+#mu-header #mu-site-logo { display: block; position: absolute; top: 5px; left: 20px;}
 #mu-header #mu-site-logo h1 { margin: 0; font-size: 18px;}
 #mu-header #mu-site-logo h1 a { color: #BBCEFF}
+#mu-header #fo_loginbar_wrapper { position:  absolute; top: 0; right: 30px; height: 30px; }
+#mu-header #fo_loginbar_wrapper span { font-size: 17px; color: #FFF; text-shadow: 0 -1px 0 #CD6C11; }
+#mu-header #fo_loginbar_wrapper span a { font-size: 17px; color: #FFF; }
+#mu-header #fo_loginbar_wrapper > div { float: left; height: 30px; background-image: url(../images/mu_login_bar.png); background-repeat: no-repeat; }
+#mu-header #fo_loginbar_wrapper .fo_loginbar_l { width: 7px; }
+#mu-header #fo_loginbar_wrapper .fo_loginbar_m { float: left; padding: 0 10px; background-position: -10px 0; padding-top: 5px; }
+#mu-header #fo_loginbar_wrapper .fo_loginbar_r { width: 7px; background-position: -273px 0; }
+#mu-header #fo_loginbar_wrapper .fo_loginbar_m .fb_hidden { display: none; }
+/*
 #mu-header #mu-login-bar { display: block; float: right; width: 420px; height: 40px; margin: 10px 30px 0 0;}
 #mu-header #mu-login-bar p { text-align: right; font-size: 16px; color: #6C6C6C;}
 #mu-header #mu-login-bar input { float: left; width: 145px; border: 1px solid #FFB56F; margin-right: 5px; }
 #mu-header #mu-login-bar #mu-login-btn-wrapper { display: block; float: right; margin-top: -1px; cursor: pointer;}
-#mu-header #mu-free-signup { float: right; font-size: 40px; color: #ff8715; line-height: 42px; margin: 8px 20px 0 0;}
+*/
+#mu-header #mu-free-signup { float: right; font-size: 24px; color: #ff8715; line-height: 30px; margin: 8px 20px 0 0;}
 #mu-header #mu-free-signup a { color: #ff8715;}
 #mu-header #mu-free-signup a:hover { text-decoration: underline;}
-#mu-header #mu-social-network-bar { float: right; clear: right; padding-right: 30px; margin-top: 8px; height: 48px; width: 230px; color: #6c6c6c; font-size: 16px;}
-#mu-header #mu-social-network-bar span { display: block; float: left; margin-top: 18px;}
-#mu-header #mu-social-network-bar .mu-sns-32x32-icon { overflow: hidden; width: 32px; height: 32px; margin: 4px 0 0 5px; float: left; font-size: 9px;}
-#mu-header #mu-social-network-bar .mu-sns-fb img {}
-#mu-header #mu-social-network-bar .mu-sns-tt img { margin-left: -32px;}
-#mu-header #mu-social-network-bar .mu-sns-wb img { margin-left: -64px;}
-#mu-header #mu-social-network-bar .mu-sns-rs img { margin-left: -96px;}
+
 
 /** Section C **/
 #mu-body-wrapper-t { height: 22px; background: url("../images/mu_body_bg.png") no-repeat scroll 0 0 transparent;}
@@ -183,7 +188,16 @@ border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); 
 #mu-main-body { margin: 0 auto 0 30px; width: 900px; padding: 20px 10px 20px 0; background: url("../images/mu_main_body_m.png") repeat-y scroll 0 0 transparent;}
 #mu-main-body #mu-contents-wrapper { padding: 0 20px;}
 #mu-main-body-b { margin: 0 auto 0 30px; width: 910px; height: 20px; background: url("../images/mu_main_body_b.png") no-repeat scroll 0 0 transparent; } 
-#mu-copyright p { padding: 0 30px; margin: 0; color: #666; font-size: 10px;}
+#mu-copyright p.mu_copyright_text { padding: 0 30px; margin: 0; color: #666; font-size: 10px; width: 400px; float: left; display: block; }
+
+#mu-copyright #mu-social-network-bar { float: right; padding-right: 30px; height: 48px; width: 230px; color: #6c6c6c; display: block; }
+#mu-copyright #mu-social-network-bar span { display: block; float: left; margin-top: 18px;}
+#mu-copyright #mu-social-network-bar .mu-sns-32x32-icon { overflow: hidden; width: 32px; height: 32px; margin: 4px 0 0 5px; float: left; font-size: 9px;}
+#mu-copyright #mu-social-network-bar .mu-sns-fb img {}
+#mu-copyright #mu-social-network-bar .mu-sns-tt img { margin-left: -32px;}
+#mu-copyright #mu-social-network-bar .mu-sns-wb img { margin-left: -64px;}
+#mu-copyright #mu-social-network-bar .mu-sns-rs img { margin-left: -96px;}
+
 
 /** Number Set **/
 .mu-numberSet01 { background: url("../images/numberSet_01.png") no-repeat scroll 0 0 transparent; height: 32px; width: 32px; margin-top: 8px; margin-left: 20px;}
@@ -196,8 +210,28 @@ border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); 
 .mu-numberSet01.num3.finished { background-position: -64px 0;}
 .mu-numberSet01.num4.finished { background-position: -96px 0;}
 
-/* Others/ plug-in */
-.mu-sortable { min-height: 100px;}
+/** Popups **/
+#fo_popup_loginBox { width: 550px; }
+#fo_popup_loginBox .fo_left { float: left; width: 218px; padding: 40px 0; }
+#fo_popup_loginBox .fo_right { float: left; width: 300px; padding: 40px 0 40px 30px; border-left: 1px solid #dcd4cf; }
+#fo_popup_loginBox h5 { color: #9b501f; font-size: 20px; line-height: 50px; margin-bottom: 20px; font-weight: bold; }
+#fo_popup_loginBox h5 img { vertical-align: middle; margin-right:  10px;}
+#fo_popup_loginBox p { color: #ac8c77; font-size: 16px; line-height: 20px; padding-right: 20px; }
+#fo_popup_loginBox label.fo_textboxLB { color: #ac8c77; font-size: 16px; line-height: 20px; float: left; width: 80px; padding-right: 10px; text-align: right; }
+#fo_popup_loginBox .fo_checkboxWrapper { display:  block; margin-top: 15px; float: left; width: 200px;}
+#fo_popup_loginBox label.fo_checkboxLB { color: #ac8c77; font-size: 16px; line-height: 20px; margin-left: 10px; }
+#fo_popup_loginBox input[type="checkbox"] { float: left; display: block; margin-top: 4px; }
+#fo_popup_loginBox button { display: block; margin-top: 10px; font-size: 18px; float: right; }
+#fo_popup_signupBox h5 { color: #9b501f; font-size: 20px; line-height: 50px; margin-bottom: 20px; font-weight: bold; }
+#fo_popup_signupBox .of_signup_submit { width: 420px; text-align: center;}
+#fo_popup_signupBox .of_signup_submitBtn { font-size:  20px; vertical-align: bottom;}
+#fo_popup_signupBox .of_signup_cancelBtn { vertical-align: bottom;}
+
+/* Others / plug-in */
+.mu-sortable { min-height: 100px; }
+
+
+
 
 
 /* PRINT */

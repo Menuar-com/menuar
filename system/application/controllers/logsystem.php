@@ -5,7 +5,7 @@ class Logsystem extends Controller {
 	function index()
 	{
 		// Blank
-		echo "testing";
+		echo "Directly entrance is prohibited.";
 	}
 	
 	function login()
@@ -43,17 +43,12 @@ class Logsystem extends Controller {
 				'login'			=> TRUE
 			);
 			$this->session->set_userdata($session_data);
-			echo 'welcome';
-			//redirect('/logsystem/welcome', 'refresh');
+			echo 'j465rEW41A64EH88';
 		}
 		else
 		{
-			echo 'wrong username or password';
+			echo 'fExHFslUK6vnLXtL';
 		}
-		
-		
-		//$this->session->set_userdata($data);
-		//echo "Welcome" + $data['email'];
 	}
 	
 	function welcome()
