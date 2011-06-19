@@ -24,7 +24,7 @@ img.flushright { margin-right: -20px; }
 /** General **/
 
 /** TYPE **/
-body { font: 12px/18px "Lucida Grande",Helvetica,Arial,sans-serif; color: #333; background: url("../images/mu-main-bg.gif") repeat-x scroll 0 0 #f8f3f0; margin: 0; }
+body { font: 12px/18px "Lucida Grande","Lucida Sans Unicode",Helvetica,"微軟正黑體",Arial,Verdana,sans-serif; color: #333; background: url("../images/mu-main-bg.gif") repeat-x scroll 0 0 #f8f3f0; margin: 0; }
 a { color: #08c; cursor: pointer; }
 a:link, a:visited, a:active { text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -66,7 +66,7 @@ a.audio { background: url(./../elements/icons/globaliconaudio12x12.gif) 0 0.4em 
 
 /** Form Style **/
 input {-moz-border-radius-bottomright:7px; -moz-border-radius-topleft:7px;border-top-left-radius: 7px;
-border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); background-position:100% 0; background-repeat:no-repeat; border:1px solid #CCCCCC; color:#666666; display:block; font-size:18px; margin-bottom:5px; padding:3px 0 3px 3px; width:195px;}
+border-bottom-right-radius: 7px; background-image:url("../images/form_bg.png"); background-position:100% 0; background-repeat:no-repeat; border:1px solid #CCCCCC; color:#666666; display:block; font-size:18px; margin-bottom:5px; padding:3px; width:195px;}
 input[type="checkbox"] { padding: 0; margin: 0; width: auto; }
 .form ul { margin: 0; padding: 0;}
 .form ul li { display: block; padding: 5px 0; margin: 0 0 10px; width: 200px; }
@@ -77,7 +77,7 @@ input[type="checkbox"] { padding: 0; margin: 0; width: auto; }
 .form input.error { background-position: 100% -60px; border-color: #FF6600;}
 .form .form_input { display: block; width: auto; clear: both;}
 .form .error_msg { display: block; width: auto; float: left; }
-.form label.error { color:#FF6600; font-size:10px; line-height:1.3em; margin:0 !important; position:relative; top:-2px; }
+.form label.error { color:#FF6600; font-size:12px; line-height:1.3em; margin:0 !important; position:relative; top:-2px; }
 /* -- Specific form sector -- */
 .form .form_wholeline { width: 420px; float: none; clear: both; }
 .form .form_wholeline input[type="text"] { width: 415px; }
@@ -133,7 +133,7 @@ input[type="checkbox"] { padding: 0; margin: 0; width: auto; }
 #mu-header #fo_loginbar_wrapper .fo_loginbar_l { width: 7px; }
 #mu-header #fo_loginbar_wrapper .fo_loginbar_m { float: left; padding: 0 10px; background-position: -10px 0; padding-top: 5px; }
 #mu-header #fo_loginbar_wrapper .fo_loginbar_r { width: 7px; background-position: -273px 0; }
-#mu-header #fo_loginbar_wrapper .fo_loginbar_m .fb_hidden { display: none; }
+#mu-header #fo_loginbar_wrapper .fo_loginbar_m .fo_hidden { display: none; }
 /*
 #mu-header #mu-login-bar { display: block; float: right; width: 420px; height: 40px; margin: 10px 30px 0 0;}
 #mu-header #mu-login-bar p { text-align: right; font-size: 16px; color: #6C6C6C;}
@@ -218,17 +218,29 @@ input[type="checkbox"] { padding: 0; margin: 0; width: auto; }
 #fo_popup_loginBox h5 img { vertical-align: middle; margin-right:  10px;}
 #fo_popup_loginBox p { color: #ac8c77; font-size: 16px; line-height: 20px; padding-right: 20px; }
 #fo_popup_loginBox label.fo_textboxLB { color: #ac8c77; font-size: 16px; line-height: 20px; float: left; width: 80px; padding-right: 10px; text-align: right; }
+#fo_popup_loginBox label.error { padding-left: 90px;}
+#fo_popup_loginBox .fo_textinputWrapper { display: block; width: 200px; }
 #fo_popup_loginBox .fo_checkboxWrapper { display:  block; margin-top: 15px; float: left; width: 200px;}
 #fo_popup_loginBox label.fo_checkboxLB { color: #ac8c77; font-size: 16px; line-height: 20px; margin-left: 10px; }
+#fo_popup_loginBox input { font-size: 14px; }
 #fo_popup_loginBox input[type="checkbox"] { float: left; display: block; margin-top: 4px; }
 #fo_popup_loginBox button { display: block; margin-top: 10px; font-size: 18px; float: right; }
-#fo_popup_signupBox h5 { color: #9b501f; font-size: 20px; line-height: 50px; margin-bottom: 20px; font-weight: bold; }
-#fo_popup_signupBox .of_signup_submit { width: 420px; text-align: center;}
+#fo_popup_signupBox h5 { color: #9b501f; font-size: 20px; line-height: 50px; margin-bottom: 20px; font-weight: bold; vertical-align: middle; text-align: center; }
+#fo_popup_signupBox h5 img { vertical-align: middle; margin-right: 10px; }
+#fo_popup_signupBox .of_signup_submit { width: 420px; text-align: center; margin-top: 20px;}
 #fo_popup_signupBox .of_signup_submitBtn { font-size:  20px; vertical-align: bottom;}
 #fo_popup_signupBox .of_signup_cancelBtn { vertical-align: bottom;}
+#fo_popup_signupBox label.fo_textboxLB { color: #ac8c77; font-size: 16px; line-height: 20px; }
+#fo_popup_signupBox .fo_checkboxWrapper input { float: left; display: block; padding-top: 3px; }
+#fo_popup_signupBox .fo_checkboxWrapper label { float: left; display: block; color: #ac8c77;}
+#fo_popup_signedBox { height: 200px; }
+#fo_popup_signupBox h5 { color: #9b501f; font-size: 20px; line-height: 50px; margin-bottom: 20px; font-weight: bold; }
+#fo_popup_signupBox p { color: #ac8c77; font-size: 16px; line-height: 20px; }
 
 /* Others / plug-in */
 .mu-sortable { min-height: 100px; }
+
+
 
 
 

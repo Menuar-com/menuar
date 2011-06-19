@@ -53,7 +53,8 @@ class Registration extends Controller {
 		}
 		else
 		{
-			echo 'This email is already signed up';
+			// Email is already signed up
+			echo "Qfl47cDJK0EbP45g";
 		}
 	}
 	

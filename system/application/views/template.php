@@ -10,7 +10,6 @@
 
 <link rel="stylesheet" href='style/base.css' type="text/css" />
 <link rel="stylesheet" href='style/ui-lightness/jquery-ui-1.8.9.custom.css' type="text/css" />
-<link rel="stylesheet" href='style/shadowbox.css' type="text/css" />
 <link rel="stylesheet" href='plugin/fancybox/jquery.fancybox-1.3.4.css' type="text/css" />
 
 <?= $_styles ?>
@@ -28,9 +27,10 @@
 	google.load("jqueryui", "1.8.10");
 </script>
 <script type="text/javascript" src="script/common.js"></script>
-<script src="plugin/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-<script src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
-<script src="script/jquery.livequery.js" type="text/javascript"></script>
+<script type="text/javascript" src="plugin/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
+<script type="text/javascript" src="script/jquery.livequery.js"></script>
+<script type="text/javascript" src="script/jquery.validate.min.1.8.1.js"></script>
 <?= $_scripts ?>
 
 <title><?= $title ?></title>
@@ -69,12 +69,12 @@
 		<div id="fo_loginbar_wrapper">
 			<div class="fo_loginbar_l"></div>
 			<div class="fo_loginbar_m">
-				<div class="fo_notLogged">
+				<div class="fo_notLogged" style="display: none;">
 					<span><a class="fo_signupBtn" href="#fo_popup_signupBox">新用戶?</a> | <a class="fo_loginBtn" href="#fo_popup_loginBox">登入</a> </span>
 					<!-- Connect to Facebook -->
 				</div>
-				<div class="fo_logged fb_hidden">
-					<span>您好 ! iamsam... | <a href="">登出</a></span>
+				<div class="fo_logged" style="display: none;">
+					<span>您好! <span class="of_username">Username</span> | <a  href="#" onclick="of_logout(); return false;">登出</a></span>
 					<!-- Facebook Logged icon -->
 				</div>
 			</div>
@@ -124,61 +124,73 @@
 		</div>
 		<div class="fo_right">
 			<h5><img src="images/fo_small_logo.png" />會員登入</h5>
-			<form>
-				<label class="fo_textboxLB">登入電郵：</label>
-				<input type="text" value="" maxlength="255" class="required email error" name="email" id="email">
-				<label class="fo_textboxLB">密碼：</label>
-				<input type="password" value="" maxlength="255" class="required password" name="password" id="password">
+			<form id="fo_form_login" class="form" action="online/welcome/login.html">
+				<div class="fo_textinputWrapper">
+					<label class="fo_textboxLB">登入電郵：</label>
+					<input type="text" value="" maxlength="255" class="required email" name="email" id="email">
+				</div>
+				<div class="fo_textinputWrapper">
+					<label class="fo_textboxLB">密碼：</label>
+					<input type="password" value="" maxlength="255" class="required password" name="password" id="password">
+				</div>
 				<div class="fo_checkboxWrapper">
-					<input type="checkbox" name="fo_rememberMe" id="fo_rememberMe" value="1" />
+					<input type="checkbox" name="rememberMe" id="fo_rememberMe" value="1" />
 					<label class="fo_checkboxLB" for="fo_rememberMe">記住我既登入資料～</label>
 				</div>
-				<button class="fo_login_btn">登入</button>
+				<button class="fo_login_btn" type="submit">登入</button>
 			</form>
 			<div class="clearer"></div>
 		</div>
 	</div>
 	<div id="fo_popup_signupBox">
-		<h5>新用戶登記</h5>
-		<form class="form">
+		<h5><img src="images/fo_small_logo.png">新用戶登記</h5>
+		<form id="fo_popup_signupBox_form" class="form" action="online/welcome/registration.html">
 			<ul>
 				<li class="mu-form-crossline" id="mu-li-email">
-					<label for="email" class="description">電郵地址：</label>
+					<label for="email" class="description fo_textboxLB">電郵地址：</label>
 					<div class="mu-form-input">
-						<input type="text" value="" maxlength="255" class="required email error" name="email" id="email"><label for="email" generated="true" class="error">請輸入正確的電郵地址。</label>
+						<input type="text" value="" maxlength="255" class="required email" name="email" id="email">
 					</div>
 					<div class="clearer"></div>
 				</li>
 				<li class="left" id="mu-li-password">
-					<label for="password" class="description">密碼：</label>
+					<label for="password" class="description fo_textboxLB">密碼：</label>
 					<div class="form_input">
 						<input type="password" value="" maxlength="255" class="required password" name="password" id="password">
 					</div>
 					<div class="clearer"></div>
 				</li>
-				<li class="right" id="mu-li-re-password">重複輸入密碼：
+				<li class="right" id="mu-li-re-password">
+					<label for="re_password" class="description fo_textboxLB">重複輸入密碼：</label>
 					<div class="form_input">
-						<input type="password" value="" equalto="#password" maxlength="255" class="required password" name="re_password" id="re_password">
+						<input type="password" value="" equalto="#fo_popup_signupBox_form #password" maxlength="255" class="required password" name="re_password" id="re_password">
 					</div>
 					<div class="clearer"></div>
 				</li>
-				<li class="form_wholeline" id="mu-li-promo">
-					<label>
-						<input type="checkbox" value="1" name="promo">
+				<li class="form_wholeline fo_checkboxWrapper">
+					<input type="checkbox" value="1" name="promo" id="of_form_promo">
+					<label for="of_form_promo">
 						我不想定期在電子信箱中收到OrderFood.com.hk的精選優惠資訊。
 					</label>
-					<label>
-						<input type="checkbox" value="1" name="TandC">
+				</li>
+				<li class="form_wholeline fo_checkboxWrapper">
+					<input type="checkbox" value="1" name="TandC" id="of_form_TandC">
+					<label for="of_form_TandC">
 						我同意且已閱讀OrderFood.com.hk的使用條款。
 					</label>
 				</li>
 				<li class="of_signup_submit">
 					<input type="hidden" value="3ephusP8" name="ssCode">
-					<button class="of_signup_submitBtn">遞交</button>
-					<button class="of_signup_cancelBtn">取消</button>
+					<button class="of_signup_submitBtn" type="submit">遞交</button>
+					<button class="of_signup_cancelBtn" type="reset">取消</button>
 				</li>
 			</ul>
 		</form>
+	</div>
+	<div id="fo_popup_signedBox">
+		<h5>成功注冊</h5>
+		<p>恭喜你，你經已成功注冊成為OrderFood.com.hk的會員，可享用本平台叫外賣。</p>
+		<button>叫外賣</button>
 	</div>
 </div>
 

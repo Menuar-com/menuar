@@ -45,7 +45,14 @@ class MemberSystem extends Model {
 				'email'		=> $this->input->post('email'),
 				'login'		=> TRUE
 			);
+			
+			if ($this->input->post('rememberMe') == 1)
+				$config['sess_expiration'] = 0;
+			else
+				$config['sess_expire_on_close'] = TRUE;
+			
 			$this->session->set_userdata($session_data);
+			
 			return TRUE;
 		}
 		else

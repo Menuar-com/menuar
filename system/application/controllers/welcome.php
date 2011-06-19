@@ -22,26 +22,93 @@ class Welcome extends Controller {
 		$this->template->render();
 		//}
 	}
+	
+	function isLogged()
+	{
+		if ($this->MemberSystem->isLogin() == TRUE)
+			echo "X7plB7u3NM3i8hZ6";
+		else
+			echo "5q11G76i3E631s9S";
+	}
+	
 	function login()
 	{
 		if ($this->MemberSystem->memberLogin() == TRUE)
-		{
-			$this->load->view('common/loginInfo');
-		}
+			echo "7R38M1t868ZC7YAH";
+		else
+			echo "21I741E113IRd10C";
 	}
+	
 	function logout()
 	{
 		$this->MemberSystem->memberLogout();
-		redirect('/welcome', 'refresh');
 	}
+	
+	function registration() {
+		$this->db->where('cusEmail', $this->input->post('email'));
+		$query = $this->db->get('customerinfo');
+		
+		if ($query->num_rows == 0){
+			
+			$data = $_POST;
+			
+			// Valudate data
+			if ( ! isset($_POST['gender']))
+			{
+				$data['gender'] = '3';
+			}
+			if ( ! isset($_POST['promo']))
+			{
+				$data['promo'] = '0';
+			}
+			
+			$data['password'] = md5($data['password']);
+			
+			/*
+if ( ! isset($_POST['fullname'])) {
+				$data['fullname'] = ""; }
+			if ( ! isset($_POST['phone'])) {
+				$data['phone'] = ""; }
+			if ( ! isset($_POST['address'])) {
+				$data['address'] = ""; }
+			if ( ! isset($_POST['birthday'])) {
+				$data['birthday'] = ""; }
+			if ( ! isset($_POST['fullname'])) {
+				$data['fullname'] = ""; }
+			if ( ! isset($_POST['promo'])){
+				$data['promo'] = ""; }
+*/
+
+			
+			$db_data = array(
+				'cusPassword'			=> $data['password'],
+				//'cusName'				=> $data['fullname'],
+				'cusEmail'				=> $data['email'],
+				/*
+'cusPhoneArray'			=> $data['phone'],
+				'cusAddressArray'		=> $data['address'],
+				'cusBirthday'			=> $data['birthday'],
+				'cusGender'				=> $data['gender'],*/
+				'cusPromo'				=> $data['promo']
+
+			);
+			
+						
+			$this->db->insert('customerinfo', $db_data);
+			//$this->info($data);
+			echo "L5UbSg6BATg8OfKE";
+		}
+		else
+		{
+			// Email is already signed up
+			echo "Qfl47cDJK0EbP45g";
+		}
+	
+	}
+	
 	function regionChoice()
 	{
 		$this->template->write_view('content', 'regionchoice');
-		$this->template->render();
-	}
-	function testing()
-	{
-		$this->template->write_view('content', 'testing');
 		$this->template->render();
 	}
 	
@@ -50,6 +117,7 @@ class Welcome extends Controller {
 		$this->template->write_view('content', 'regionConstructor');
 		$this->template->render();
 	}
+	
 	function getLocation()
 	{
 		// set your API key here
